@@ -1,0 +1,160 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated to retro gaming palette with charcoal background, neon green, and retro orange */
+  --background: #121212; /* charcoal background */
+  --foreground: #00ff66; /* neon terminal green text */
+  --card: #1a1a1a; /* slightly lighter charcoal for cards */
+  --card-foreground: #00ff66; /* neon green text on cards */
+  --popover: #121212; /* charcoal */
+  --popover-foreground: #00ff66; /* neon green */
+  --primary: #00ff66; /* neon terminal green */
+  --primary-foreground: #121212; /* charcoal text on green */
+  --secondary: #ff6600; /* retro orange */
+  --secondary-foreground: #121212; /* charcoal text on orange */
+  --muted: #2a2a2a; /* muted charcoal */
+  --muted-foreground: #888888; /* muted green */
+  --accent: #ff6600; /* retro orange accent */
+  --accent-foreground: #121212; /* charcoal text on orange */
+  --destructive: #ff4444; /* bright red for errors */
+  --destructive-foreground: #121212; /* charcoal */
+  --border: #333333; /* dark border */
+  --input: #1a1a1a; /* dark input background */
+  --ring: #00ff66; /* neon green focus ring */
+  --chart-1: #00ff66; /* neon green */
+  --chart-2: #ff6600; /* retro orange */
+  --chart-3: #44ff44; /* lighter green variant */
+  --chart-4: #ff8833; /* lighter orange variant */
+  --chart-5: #666666; /* neutral gray */
+  --radius: 0.5rem;
+  --sidebar: #121212; /* charcoal */
+  --sidebar-foreground: #00ff66; /* neon green */
+  --sidebar-primary: #00ff66; /* neon green */
+  --sidebar-primary-foreground: #121212; /* charcoal */
+  --sidebar-accent: #ff6600; /* retro orange */
+  --sidebar-accent-foreground: #121212; /* charcoal */
+  --sidebar-border: #333333; /* dark border */
+  --sidebar-ring: #00ff66; /* neon green ring */
+  --font-dm-sans: "DM Sans", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+}
+
+.dark {
+  /* Updated dark mode to use same retro palette */
+  --background: #121212;
+  --foreground: #00ff66;
+  --card: #1a1a1a;
+  --card-foreground: #00ff66;
+  --popover: #121212;
+  --popover-foreground: #00ff66;
+  --primary: #00ff66;
+  --primary-foreground: #121212;
+  --secondary: #ff6600;
+  --secondary-foreground: #121212;
+  --muted: #2a2a2a;
+  --muted-foreground: #888888;
+  --accent: #ff6600;
+  --accent-foreground: #121212;
+  --destructive: #ff4444;
+  --destructive-foreground: #121212;
+  --border: #333333;
+  --input: #1a1a1a;
+  --ring: #00ff66;
+  --chart-1: #00ff66;
+  --chart-2: #ff6600;
+  --chart-3: #44ff44;
+  --chart-4: #ff8833;
+  --chart-5: #666666;
+  --sidebar: #121212;
+  --sidebar-foreground: #00ff66;
+  --sidebar-primary: #00ff66;
+  --sidebar-primary-foreground: #121212;
+  --sidebar-accent: #ff6600;
+  --sidebar-accent-foreground: #121212;
+  --sidebar-border: #333333;
+  --sidebar-ring: #00ff66;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-space-grotesk);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Added gaming-style animations and effects */
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.gaming-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.gaming-float {
+  animation: float 3s ease-in-out infinite;
+}
