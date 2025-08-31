@@ -5,7 +5,7 @@
 
 :root {
   /* Updated to retro gaming palette with charcoal background, neon green, and retro orange */
-  --background: #121212; /* charcoal background */
+  --background: #2a2a2a; /* charcoal background */
   --foreground: #00ff66; /* neon terminal green text */
   --card: #1a1a1a; /* slightly lighter charcoal for cards */
   --card-foreground: #00ff66; /* neon green text on cards */
@@ -45,7 +45,7 @@
 
 .dark {
   /* Updated dark mode to use same retro palette */
-  --background: #121212;
+  --background: #12121200;
   --foreground: #00ff66;
   --card: #1a1a1a;
   --card-foreground: #00ff66;

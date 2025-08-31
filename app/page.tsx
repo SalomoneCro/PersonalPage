@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -21,65 +21,38 @@ import {
   Twitter,
   Menu,
   X,
+  ExternalLink,
+  Clock,
+  Mountain,
 } from "lucide-react"
 
 export default function IndieHackerPortfolio() {
   const [isVisible, setIsVisible] = useState(false)
   const [activeSection, setActiveSection] = useState("hero")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-
-    const handleScroll = () => {
-      const sections = ["hero", "projects", "experience", "education"]
-      const scrollPosition = window.scrollY + 100
-
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element && scrollPosition >= element.offsetTop) {
-          setActiveSection(section)
-        }
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
   const currentProjects = [
     {
-      title: "TaskFlow SaaS",
-      description: "Plataforma de gestión de proyectos para equipos remotos con IA integrada",
-      status: "En desarrollo",
-      tech: ["Next.js", "Supabase", "OpenAI", "Stripe"],
-      metrics: "€2.5K MRR objetivo",
-      users: "Beta con 150 usuarios",
-      icon: Rocket,
+      title: "Outsiders",
+      description: "App de seguimiento de progreso de Snowboarders profesionales",
+      status: "MVP lanzado",
+      Objective: "Explotar rendimiento de atletas extremos basandose en datos",
+      users: "Beta con un equipo de 5 profesionales y su coach",
+      icon: Mountain,
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
     {
-      title: "CodeSnippet Marketplace",
-      description: "Marketplace para comprar y vender snippets de código reutilizables",
-      status: "MVP lanzado",
-      tech: ["React", "Firebase", "PayPal API"],
-      metrics: "€800 MRR actual",
-      users: "500+ desarrolladores",
-      icon: Code,
-      color: "text-secondary",
-      bgColor: "bg-secondary/10",
-    },
-    {
-      title: "LocalBiz Analytics",
-      description: "Dashboard de analytics para pequeños negocios locales",
-      status: "Validando mercado",
-      tech: ["Vue.js", "Python", "PostgreSQL"],
-      metrics: "€1K MRR objetivo",
-      users: "25 negocios piloto",
-      icon: TrendingUp,
-      color: "text-accent",
-      bgColor: "bg-accent/10",
+      title: "CanchaYa",
+      description: "App de gestion de canchas de basquet",
+      status: "Validando idea",
+      Objective: "Tener una plataforma que centraliza todos los turnos y canchas de basquet de la ciudad de Córdoba",
+      users: "0 usuarios",
+      icon: Rocket,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
     },
   ]
 
@@ -92,6 +65,7 @@ export default function IndieHackerPortfolio() {
       metrics: "2K+ usuarios activos",
       icon: Target,
       color: "text-primary",
+      year: "2023",
     },
     {
       title: "Newsletter Automation",
@@ -101,6 +75,7 @@ export default function IndieHackerPortfolio() {
       metrics: "100 usuarios beta",
       icon: Mail,
       color: "text-secondary",
+      year: "2022",
     },
   ]
 
@@ -135,42 +110,134 @@ export default function IndieHackerPortfolio() {
     },
   ]
 
+  const useStaggeredAnimation = (itemCount: number) => {
+    const [animatedItems, setAnimatedItems] = useState<Set<number>>(new Set())
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        for (let i = 0; i < itemCount; i++) {
+          setTimeout(() => {
+            setAnimatedItems((prev) => new Set([...prev, i]))
+          }, i * 150)
+        }
+      }, 300)
+
+      return () => clearTimeout(timer)
+    }, [itemCount])
+
+    return animatedItems
+  }
+
+  const animatedCurrentProjects = useStaggeredAnimation(currentProjects.length)
+  const animatedPreviousProjects = useStaggeredAnimation(previousProjects.length)
+
+  useEffect(() => {
+    setIsVisible(true)
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const newVisibleSections = new Set(visibleSections)
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            newVisibleSections.add(entry.target.id)
+            setActiveSection(entry.target.id)
+          } else {
+            newVisibleSections.delete(entry.target.id)
+          }
+        })
+        setVisibleSections(newVisibleSections)
+      },
+      { threshold: 0.3, rootMargin: "-20% 0px -20% 0px" },
+    )
+
+    const sections = document.querySelectorAll("section[id]")
+    sections.forEach((section) => observerRef.current?.observe(section))
+
+    return () => {
+      observerRef.current?.disconnect()
+    }
+  }, [])
+
+  const [typedText, setTypedText] = useState("")
+  const fullText = "Estudiante y Emprendedor"
+
+  useEffect(() => {
+    let index = 0
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index))
+        index++
+      } else {
+        clearInterval(timer)
+      }
+    }, 100)
+
+    return () => clearInterval(timer)
+  }, [])
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <div className="min-h-screen bg-background">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-primary/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-b border-primary/20 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
-            <div className="font-heading font-bold text-lg text-primary">IndieHacker.dev</div>
+            <div className="font-heading font-bold text-lg text-primary hover:text-primary/80 transition-colors cursor-pointer">
+              IndieHacker.dev
+            </div>
             <div className="hidden md:flex items-center space-x-6">
-              {["Inicio", "Proyectos", "Experiencia", "Contacto"].map((item, index) => (
-                <a
-                  key={item}
-                  href={`#${["hero", "projects", "experience", "contact"][index]}`}
-                  className="text-sm text-foreground hover:text-primary transition-colors font-medium"
+              {[
+                { name: "Inicio", id: "hero" },
+                { name: "Proyectos", id: "projects" },
+                { name: "Experiencia", id: "experience" },
+                { name: "Contacto", id: "contact" },
+              ].map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-sm font-medium transition-all duration-300 hover:text-primary relative ${
+                    activeSection === item.id ? "text-primary" : "text-foreground"
+                  }`}
                 >
-                  {item}
-                </a>
+                  {item.name}
+                  {activeSection === item.id && (
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full animate-pulse" />
+                  )}
+                </button>
               ))}
             </div>
             <button
-              className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+              className="md:hidden p-2 text-foreground hover:text-primary transition-colors hover:bg-primary/10 rounded-lg"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
           {isMobileMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 border-t border-primary/20">
+            <div className="md:hidden mt-4 pb-4 border-t border-primary/20 animate-in slide-in-from-top-2 duration-300">
               <div className="flex flex-col space-y-3 pt-4">
-                {["Inicio", "Proyectos", "Experiencia", "Contacto"].map((item, index) => (
-                  <a
-                    key={item}
-                    href={`#${["hero", "projects", "experience", "contact"][index]}`}
-                    className="text-sm text-foreground hover:text-primary transition-colors font-medium px-2 py-1"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                {[
+                  { name: "Inicio", id: "hero" },
+                  { name: "Proyectos", id: "projects" },
+                  { name: "Experiencia", id: "experience" },
+                  { name: "Contacto", id: "contact" },
+                ].map((item, index) => (
+                  <button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`text-sm font-medium px-3 py-2 rounded-lg transition-all duration-300 text-left hover:bg-primary/10 ${
+                      activeSection === item.id ? "text-primary bg-primary/5" : "text-foreground"
+                    }`}
+                    style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    {item}
-                  </a>
+                    {item.name}
+                  </button>
                 ))}
               </div>
             </div>
@@ -187,60 +254,55 @@ export default function IndieHackerPortfolio() {
             <div className="text-center space-y-3">
               <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>Madrid, España</span>
-                <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+                <span>Argentina</span>
+                <div className="relative">
+                  <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+                  <div className="absolute inset-0 w-2 h-2 bg-secondary rounded-full animate-ping opacity-75"></div>
+                </div>
                 <span>Construyendo</span>
               </div>
 
               <h1 className="font-heading font-bold text-xl text-balance">
-                Hola, soy <span className="text-primary">Alex Rodríguez</span>
+                Hola, soy <span className="text-primary">Pedro Salomone!</span>
               </h1>
 
-              <p className="text-base text-secondary font-medium">Indie Hacker & Startup Builder</p>
+              <p className="text-base text-secondary font-medium min-h-[24px]">
+                {typedText}
+                <span className="animate-pulse">|</span>
+              </p>
 
               <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">
-                Transformo ideas en productos digitales rentables. Especializado en MVPs rápidos, validación de mercado
-                y crecimiento de startups desde cero hasta €10K+ MRR.
+                Siempre que emprendí online fracasé. 
+                A cuántos fracasos estaré de mi primer éxito? 
               </p>
             </div>
 
             <div className="relative gaming-float flex justify-center">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-2xl blur-2xl"></div>
-              <Avatar className="relative w-24 h-24 border-4 border-primary shadow-xl gaming-glow">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-2xl blur-3xl animate-pulse"></div>
+              <div className="absolute inset-2 bg-gradient-to-r from-accent/20 via-primary/20 to-secondary/20 rounded-xl blur-xl"></div>
+              <Avatar className="relative w-24 h-24 border-4 border-primary shadow-2xl hover:scale-105 transition-transform duration-300">
                 <AvatarImage src="/placeholder.svg?height=96&width=96" />
                 <AvatarFallback className="text-xl font-heading font-bold bg-card text-primary">AR</AvatarFallback>
               </Avatar>
             </div>
 
             <div className="flex justify-center space-x-3">
-              <Button
-                size="sm"
-                variant="outline"
-                className="w-10 h-10 p-0 border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-              >
-                <Mail className="w-4 h-4" />
-              </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                className="w-10 h-10 p-0 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent"
-              >
-                <Github className="w-4 h-4" />
-              </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                className="w-10 h-10 p-0 border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent"
-              >
-                <Linkedin className="w-4 h-4" />
-              </Button>
-              <Button
-                size="sm"
-                variant="outline"
-                className="w-10 h-10 p-0 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white bg-transparent"
-              >
-                <Twitter className="w-4 h-4" />
-              </Button>
+              {[
+                { icon: Mail, color: "primary", href: "pedrosalomonee@gmail.com.com" },
+                { icon: Github, color: "secondary", href: "https://github.com/SalomoneCro" },
+                { icon: Linkedin, color: "accent", href: "https://www.linkedin.com/in/pedrosalomone/" },
+                { icon: Twitter, color: "blue-500", href: "https://x.com/Indie_P_" },
+              ].map((social, index) => (
+                <Button
+                  key={index}
+                  size="sm"
+                  variant="outline"
+                  className={`w-10 h-10 p-0 border-${social.color} text-${social.color} hover:bg-${social.color} hover:text-white bg-transparent hover:scale-110 transition-all duration-300 hover:shadow-lg`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <social.icon className="w-4 h-4" />
+                </Button>
+              ))}
             </div>
           </div>
         </div>
@@ -255,60 +317,59 @@ export default function IndieHackerPortfolio() {
               <div className="space-y-4">
                 <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4" />
-                  <span>Madrid, España</span>
-                  <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+                  <span>Argentina</span>
+                  <div className="relative">
+                    <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+                    <div className="absolute inset-0 w-2 h-2 bg-secondary rounded-full animate-ping opacity-75"></div>
+                  </div>
                   <span>Construyendo</span>
                 </div>
 
                 <h1 className="font-heading font-bold text-2xl lg:text-3xl text-balance">
-                  Hola, soy <span className="text-primary">Alex Rodríguez</span>
+                  Hola, soy <span className="text-primary hover:text-primary/80 transition-colors">Pedro Salomone!</span>
                 </h1>
 
-                <p className="text-lg text-secondary font-medium">Indie Hacker & Startup Builder</p>
+                <p className="text-lg text-secondary font-medium min-h-[28px]">
+                  {typedText}
+                  <span className="animate-pulse">|</span>
+                </p>
 
                 <p className="text-sm text-foreground leading-relaxed">
-                  Transformo ideas en productos digitales rentables. Especializado en MVPs rápidos, validación de
-                  mercado y crecimiento de startups desde cero hasta €10K+ MRR.
+                  Siempre que emprendí online fracasé. 
+                  A cuántos fracasos estaré de mi primer éxito? 
                 </p>
               </div>
 
               <div className="relative gaming-float">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-2xl blur-2xl"></div>
-                <Avatar className="relative w-32 h-32 mx-auto border-4 border-primary shadow-xl gaming-glow">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-2xl blur-3xl animate-pulse"></div>
+                <div className="absolute inset-2 bg-gradient-to-r from-accent/20 via-primary/20 to-secondary/20 rounded-xl blur-xl"></div>
+                <Avatar className="relative w-32 h-32 mx-auto border-4 border-primary shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer">
                   <AvatarImage src="/placeholder.svg?height=128&width=128" />
                   <AvatarFallback className="text-2xl font-heading font-bold bg-card text-primary">AR</AvatarFallback>
                 </Avatar>
               </div>
 
               <div className="flex justify-center space-x-3">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-10 h-10 p-0 border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-                >
-                  <Mail className="w-4 h-4" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-10 h-10 p-0 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent"
-                >
-                  <Github className="w-4 h-4" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-10 h-10 p-0 border-accent text-accent hover:bg-accent hover:text-accent-foreground bg-transparent"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="w-10 h-10 p-0 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white bg-transparent"
-                >
-                  <Twitter className="w-4 h-4" />
-                </Button>
+                {[
+                  { icon: Mail, color: "primary", href: "pedrosalomonee@gmail.com.com" },
+                  { icon: Github, color: "secondary", href: "https://github.com/SalomoneCro" },
+                  { icon: Linkedin, color: "accent", href: "https://www.linkedin.com/in/pedrosalomone/" },
+                  { icon: Twitter, color: "blue-500", href: "https://x.com/Indie_P_" },
+                ].map((social, index) => (
+                  <Button
+                    key={index}
+                    size="sm"
+                    variant="outline"
+                    className={`w-10 h-10 p-0 border-${social.color} text-${social.color} hover:bg-${social.color} hover:text-white bg-transparent hover:scale-110 transition-all duration-300 hover:shadow-lg group relative`}
+                    style={{ animationDelay: `${index * 100}ms` }}
+                    title={social.label}
+                  >
+                    <social.icon className="w-4 h-4" />
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-background border border-primary/20 px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                      {social.label}
+                    </div>
+                  </Button>
+                ))}
               </div>
             </div>
           </div>
@@ -325,12 +386,20 @@ export default function IndieHackerPortfolio() {
                 {currentProjects.map((project, index) => (
                   <Card
                     key={index}
-                    className="group hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:border-primary/50 border-2 cursor-pointer"
+                    className={`group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 border-2 cursor-pointer overflow-hidden ${
+                      animatedCurrentProjects.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    }`}
+                    style={{ transitionDelay: `${index * 150}ms` }}
                   >
-                    <CardHeader className={`${project.bgColor} transition-all duration-300`}>
+                    <CardHeader className={`${project.bgColor} transition-all duration-300 relative`}>
                       <div className="flex items-center justify-between">
-                        <project.icon className={`w-6 h-6 ${project.color}`} />
-                        <Badge variant="outline" className={`${project.color} border-current text-xs`}>
+                        <project.icon
+                          className={`w-6 h-6 ${project.color} group-hover:scale-110 transition-transform duration-300`}
+                        />
+                        <Badge
+                          variant="outline"
+                          className={`${project.color} border-current text-xs hover:bg-current hover:text-background transition-colors`}
+                        >
                           {project.status}
                         </Badge>
                       </div>
@@ -338,25 +407,30 @@ export default function IndieHackerPortfolio() {
                         {project.title}
                       </CardTitle>
                       <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
+
+                      <div className="mt-3">
+                      </div>
                     </CardHeader>
                     <CardContent className="space-y-3 pt-4">
-                      <div className="flex flex-wrap gap-1">
-                        {project.tech.slice(0, 3).map((tech) => (
-                          <Badge key={tech} variant="secondary" className="text-xs">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
-                      <div className="space-y-1">
+                      <div className="space-y-2">
                         <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
                           <DollarSign className="w-3 h-3" />
-                          <span>{project.metrics}</span>
+                          <span>{project.Objective}</span>
                         </div>
                         <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
                           <Users className="w-3 h-3" />
                           <span>{project.users}</span>
                         </div>
                       </div>
+
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className={`w-full mt-3 ${project.color} hover:bg-current hover:text-background opacity-0 group-hover:opacity-100 transition-all duration-300`}
+                      >
+                        Ver detalles
+                        <ExternalLink className="w-3 h-3 ml-2" />
+                      </Button>
                     </CardContent>
                   </Card>
                 ))}
@@ -375,10 +449,18 @@ export default function IndieHackerPortfolio() {
 
               <div className="grid gap-6">
                 {previousProjects.map((project, index) => (
-                  <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-2">
+                  <Card
+                    key={index}
+                    className={`group hover:shadow-xl transition-all duration-500 border-2 overflow-hidden ${
+                      animatedPreviousProjects.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    }`}
+                    style={{ transitionDelay: `${index * 150}ms` }}
+                  >
                     <CardHeader>
                       <div className="flex items-center space-x-4">
-                        <project.icon className={`w-6 h-6 ${project.color}`} />
+                        <project.icon
+                          className={`w-6 h-6 ${project.color} group-hover:scale-110 transition-transform duration-300`}
+                        />
                         <div>
                           <CardTitle className={`font-heading group-hover:${project.color} transition-colors`}>
                             {project.title}
@@ -390,14 +472,21 @@ export default function IndieHackerPortfolio() {
                     <CardContent>
                       <div className="space-y-4">
                         <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech) => (
-                            <Badge key={tech} variant="outline" className="text-xs">
+                          {project.tech.map((tech, techIndex) => (
+                            <Badge
+                              key={tech}
+                              variant="outline"
+                              className="text-xs hover:scale-105 transition-transform duration-200"
+                              style={{ animationDelay: `${techIndex * 50}ms` }}
+                            >
                               {tech}
                             </Badge>
                           ))}
                         </div>
                         <div className={`text-sm font-medium ${project.color}`}>{project.outcome}</div>
-                        <div className="text-sm text-muted-foreground">{project.metrics}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {project.metrics} • {project.year}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -484,16 +573,20 @@ export default function IndieHackerPortfolio() {
                   sobre startups y tecnología.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="font-medium border-2">
+                  <Button
+                    size="lg"
+                    className="font-medium border-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
                     <Mail className="w-5 h-5 mr-2" />
                     alex.rodriguez@indiedev.com
                   </Button>
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent"
+                    className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent hover:scale-105 transition-all duration-300"
                   >
                     <Linkedin className="w-5 h-5 mr-2" />
+                    Conectar en LinkedIn
                   </Button>
                 </div>
               </div>
@@ -535,17 +628,10 @@ export default function IndieHackerPortfolio() {
                     <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3 pt-4">
-                    <div className="flex flex-wrap gap-1">
-                      {project.tech.slice(0, 3).map((tech) => (
-                        <Badge key={tech} variant="secondary" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
                     <div className="space-y-1">
                       <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
                         <DollarSign className="w-3 h-3" />
-                        <span>{project.metrics}</span>
+                        <span>{project.Objective}</span>
                       </div>
                       <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
                         <Users className="w-3 h-3" />
