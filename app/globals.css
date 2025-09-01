@@ -5,39 +5,23 @@
 
 :root {
   /* Updated to retro gaming palette with charcoal background, neon green, and retro orange */
-  --background: #2a2a2a; /* charcoal background */
-  --foreground: #00ff66; /* neon terminal green text */
-  --card: #1a1a1a; /* slightly lighter charcoal for cards */
+  --background: #939090; /* charcoal background */
+  --foreground: #004a1e; /* neon terminal green text */
+  --card: #898585; /* slightly lighter charcoal for cards */
   --card-foreground: #00ff66; /* neon green text on cards */
-  --popover: #121212; /* charcoal */
   --popover-foreground: #00ff66; /* neon green */
   --primary: #00ff66; /* neon terminal green */
   --primary-foreground: #121212; /* charcoal text on green */
-  --secondary: #ff6600; /* retro orange */
+  --secondary: #004a1e; /* retro orange */
   --secondary-foreground: #121212; /* charcoal text on orange */
   --muted: #2a2a2a; /* muted charcoal */
-  --muted-foreground: #888888; /* muted green */
-  --accent: #ff6600; /* retro orange accent */
+  --muted-foreground: #000000; /* muted green */
+  --accent: #004a1e; /* retro orange accent */
   --accent-foreground: #121212; /* charcoal text on orange */
   --destructive: #ff4444; /* bright red for errors */
   --destructive-foreground: #121212; /* charcoal */
   --border: #333333; /* dark border */
-  --input: #1a1a1a; /* dark input background */
-  --ring: #00ff66; /* neon green focus ring */
-  --chart-1: #00ff66; /* neon green */
-  --chart-2: #ff6600; /* retro orange */
-  --chart-3: #44ff44; /* lighter green variant */
-  --chart-4: #ff8833; /* lighter orange variant */
-  --chart-5: #666666; /* neutral gray */
   --radius: 0.5rem;
-  --sidebar: #121212; /* charcoal */
-  --sidebar-foreground: #00ff66; /* neon green */
-  --sidebar-primary: #00ff66; /* neon green */
-  --sidebar-primary-foreground: #121212; /* charcoal */
-  --sidebar-accent: #ff6600; /* retro orange */
-  --sidebar-accent-foreground: #121212; /* charcoal */
-  --sidebar-border: #333333; /* dark border */
-  --sidebar-ring: #00ff66; /* neon green ring */
   --font-dm-sans: "DM Sans", sans-serif;
   --font-space-grotesk: "Space Grotesk", sans-serif;
   --font-geist-mono: "Geist Mono", monospace;
