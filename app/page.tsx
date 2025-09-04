@@ -10,19 +10,16 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Code,
   GraduationCap,
   ChevronRight,
   Rocket,
   Target,
-  TrendingUp,
   Users,
   DollarSign,
   Twitter,
   Menu,
   X,
   ExternalLink,
-  Clock,
   Mountain,
 } from "lucide-react"
 
@@ -39,61 +36,63 @@ export default function IndieHackerPortfolio() {
       description: "Progress tracking app for professional snowboarders",
       status: "MVP launched",
       objective: "Help athletes and coaches track training progress and performance metrics",
-      users: "Beta tested with a small team of professional snowboarders and their coach, gathering feedback on usability and feature requirements",
+      users:
+        "Beta tested with a small team of professional snowboarders and their coach, gathering feedback on usability and feature requirements",
       icon: Mountain,
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
     {
-    title: "Lugarcito",
-    description: "Co-founded carpooling platform solving transportation challenges in Central and Southeast Córdoba Province, Argentina",
-    status: "Closed",
-    objective: "Connect drivers and passengers to reduce transportation costs and improve mobility access in underserved areas",
-    users: "Built from scratch: database architecture, matching algorithms, and route optimization using graph theory for maximum efficiency. Led social media marketing, creating content and editing promotional videos",
-    icon: Rocket,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      title: "Lugarcito",
+      description:
+        "Co-founded carpooling platform solving transportation challenges in Central and Southeast Córdoba Province, Argentina",
+      status: "Closed",
+      objective:
+        "Connect drivers and passengers to reduce transportation costs and improve mobility access in underserved areas",
+      users:
+        "Built from scratch: database architecture, matching algorithms, and route optimization using graph theory for maximum efficiency. Led social media marketing, creating content and editing promotional videos",
+      icon: Rocket,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
     },
     {
-    title: "Stock Trading Robots",
-    description: "Built intelligent algorithmic trading systems using advanced machine learning techniques",
-    status: "Research Phase",
-    objective: "Develop automated trading strategies through reinforcement learning and time series forecasting models",
-    users: "Successfully outperformed market benchmarks in backtesting across multiple approaches, including Proximal Policy Optimization (PPO) and Dynamic Mode Decomposition (DMD)",
-    icon: Mountain,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      title: "Stock Trading Robots",
+      description: "Built intelligent algorithmic trading systems using advanced machine learning techniques",
+      status: "Research Phase",
+      objective:
+        "Develop automated trading strategies through reinforcement learning and time series forecasting models",
+      users:
+        "Successfully outperformed market benchmarks in backtesting across multiple approaches, including Proximal Policy Optimization (PPO) and Dynamic Mode Decomposition (DMD)",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
     },
     {
-    title: "Stock Trading Robots",
-    description: "Built intelligent algorithmic trading systems using advanced machine learning techniques",
-    status: "Research Phase",
-    objective: "Develop automated trading strategies through reinforcement learning and time series forecasting models",
-    users: "Successfully outperformed market benchmarks in backtesting across multiple approaches, including Proximal Policy Optimization (PPO) and Dynamic Mode Decomposition (DMD)",
-    icon: Mountain,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      title: "AI Legal Document Summarization",
+      description:
+        "Built an automated system for generating judicial case summaries using Large Language Models for Córdoba Provincial Courts",
+      status: "Research Complete - Awaiting Expert Validation",
+      objective:
+        "Automate metadata extraction and synopsis generation from legal documents to reduce manual workload for legal professionals",
+      users:
+        "Developed advanced prompting techniques (Chain of Thought, Few-Shot) and implemented quantization for efficient processing on limited hardware. Successfully processed complex legal texts without hallucinations using Llama-3.2-11B-Vision-Instruct model",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
     },
     {
-    title: "AI Legal Document Summarization",
-    description: "Built an automated system for generating judicial case summaries using Large Language Models for Córdoba Provincial Courts",
-    status: "Research Complete - Awaiting Expert Validation",
-    objective: "Automate metadata extraction and synopsis generation from legal documents to reduce manual workload for legal professionals",
-    users: "Developed advanced prompting techniques (Chain of Thought, Few-Shot) and implemented quantization for efficient processing on limited hardware. Successfully processed complex legal texts without hallucinations using Llama-3.2-11B-Vision-Instruct model",
-    icon: Mountain,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      title: "AI Recommendation System for E-commerce Sellers",
+      description:
+        "Developing advanced recommendation system using Reinforcement Learning and Transformers to suggest actionable strategies for e-commerce sellers (ongoing thesis project)",
+      status: "In Development - Thesis Project",
+      objective:
+        "Design RL-based system that suggests strategic actions to sellers (pricing, advertising, promotions) optimizing long-term business metrics rather than immediate recommendations",
+      users:
+        "Currently working with MercadoLibre's ($MELI) ML Technical Leader. Implementing Decision Transformer and variants (RLT4Rec, Retentive DT) with offline RL techniques. Comparing against traditional baselines (GRU4Rec, SASRec, BERT4Rec) using real e-commerce data",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
     },
-    {
-    title: "AI Recommendation System for E-commerce Sellers",
-    description: "Developing advanced recommendation system using Reinforcement Learning and Transformers to suggest actionable strategies for e-commerce sellers (ongoing thesis project)",
-    status: "In Development - Thesis Project",
-    objective: "Design RL-based system that suggests strategic actions to sellers (pricing, advertising, promotions) optimizing long-term business metrics rather than immediate recommendations",
-    users: "Currently working with MercadoLibre's ($MELI) ML Technical Leader. Implementing Decision Transformer and variants (RLT4Rec, Retentive DT) with offline RL techniques. Comparing against traditional baselines (GRU4Rec, SASRec, BERT4Rec) using real e-commerce data",
-    icon: Mountain,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
-    }
   ]
 
   const previousProjects = [
@@ -127,7 +126,6 @@ export default function IndieHackerPortfolio() {
         "Built a data-driven solution from scratch to address a critical startup problem",
         "Applied both software engineering and data science skills in real-world projects",
       ],
-
       icon: Rocket,
       color: "text-primary",
     },
@@ -143,7 +141,6 @@ export default function IndieHackerPortfolio() {
         "Engaged in end-to-end product development from ideation to customer discovery and go-to-market strategies",
         "Demonstrated technical adaptability by rapidly learning and applying new technologies to solve product needs",
       ],
-
       icon: Rocket,
       color: "text-primary",
     },
@@ -159,7 +156,7 @@ export default function IndieHackerPortfolio() {
       ],
       icon: Mountain,
       color: "text-primary",
-    }
+    },
   ]
 
   const useStaggeredAnimation = (itemCount: number) => {
@@ -324,7 +321,11 @@ export default function IndieHackerPortfolio() {
               </p>
 
               <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">
-                Applied Mathematics student with hands-on experience in machine learning, product development, and sales. I combine strong mathematical foundations with practical development skills, having built multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from legal document automation to algorithmic trading systems. My goal is to leverage data science and AI to solve complex business problems.
+                Applied Mathematics student with hands-on experience in machine learning, product development, and
+                sales. I combine strong mathematical foundations with practical development skills, having built
+                multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from
+                legal document automation to algorithmic trading systems. My goal is to leverage data science and AI to
+                solve complex business problems.
               </p>
             </div>
 
@@ -386,7 +387,11 @@ export default function IndieHackerPortfolio() {
                 </p>
 
                 <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">
-                  Applied Mathematics student with hands-on experience in machine learning, product development, and sales. I combine strong mathematical foundations with practical development skills, having built multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from legal document automation to algorithmic trading systems. My goal is to leverage data science and AI to solve complex business problems.
+                  Applied Mathematics student with hands-on experience in machine learning, product development, and
+                  sales. I combine strong mathematical foundations with practical development skills, having built
+                  multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from
+                  legal document automation to algorithmic trading systems. My goal is to leverage data science and AI
+                  to solve complex business problems.
                 </p>
               </div>
 
@@ -426,13 +431,10 @@ export default function IndieHackerPortfolio() {
 
           {/* Scrollable Content */}
           <div className="ml-[33.333333%] w-2/3 min-h-screen">
-
             <section id="experience" className="py-12 px-6">
               <div className="mb-8">
                 <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">My Journey</h2>
-                <p className="text-base text-foreground">
-                  Previous work experiences
-                </p>
+                <p className="text-base text-foreground">Previous work experiences</p>
               </div>
 
               <div className="space-y-6">
@@ -474,7 +476,10 @@ export default function IndieHackerPortfolio() {
             <section id="projects" className="py-8 px-6">
               <div className="mb-6">
                 <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-primary">Projects</h2>
-                <p className="text-base text-foreground">Things I've Built - A collection of projects spanning AI, machine learning, product development and SaaS applications.</p>
+                <p className="text-base text-foreground">
+                  Things I've Built - A collection of projects spanning AI, machine learning, product development and
+                  SaaS applications.
+                </p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -503,8 +508,7 @@ export default function IndieHackerPortfolio() {
                       </CardTitle>
                       <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
 
-                      <div className="mt-3">
-                      </div>
+                      <div className="mt-3"></div>
                     </CardHeader>
                     <CardContent className="space-y-3 pt-4">
                       <div className="space-y-2">
@@ -532,31 +536,32 @@ export default function IndieHackerPortfolio() {
               </div>
             </section>
 
-
             <section id="education" className="py-12 px-6 bg-card/30">
               <div className="mb-8">
                 <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">Education</h2>
               </div>
 
               <Card className="hover:shadow-lg transition-all duration-300 border-2">
-              <CardHeader>
-                <div className="flex items-center space-x-4">
-                  <GraduationCap className="w-8 h-8 text-accent" />
-                  <div>
-                    <CardTitle className="font-heading text-xl">Bachelor's Degree in Applied Mathematics</CardTitle>
-                    <CardDescription className="text-base font-medium mt-1 text-foreground/80">
-                      Universidad Nacional de Córdoba • 2021-Present
-                    </CardDescription>
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <GraduationCap className="w-6 h-6 text-accent" />
+                    <div>
+                      <CardTitle className="font-heading text-base">Bachelor's Degree in Applied Mathematics</CardTitle>
+                      <CardDescription className="text-sm font-medium mt-1 text-foreground/80">
+                        Universidad Nacional de Córdoba • 2021-Present
+                      </CardDescription>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-base text-foreground/80">
-                  Comprehensive mathematical foundation with specialized focus on data science, computer science, and artificial intelligence. Core curriculum included: Advanced Algorithms & Data Structures, Neural Networks & Deep Learning, Differential Equations, Probability & Statistics, Bayesian Theory, Numerical Analysis, Algorithm Design & Complexity Theory, Operations Research, Mathematical Modeling, Quantitative Finance, Machine Learning, and Computational Simulation & Modeling. 
-                  <br />
-                  This rigorous program provided both theoretical depth and practical skills for solving real-world problems through mathematical and computational approaches.  
-                </p>
-              </CardContent>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-foreground/80">
+                    Comprehensive mathematical foundation with specialized focus on data science, computer science, and
+                    artificial intelligence. Core curriculum included: Advanced Algorithms & Data Structures, Neural
+                    Networks & Deep Learning, Differential Equations, Probability & Statistics, Bayesian Theory,
+                    Numerical Analysis, Algorithm Design & Complexity Theory, Operations Research, Mathematical
+                    Modeling, Quantitative Finance, Machine Learning, and Computational Simulation & Modeling.
+                  </p>
+                </CardContent>
               </Card>
             </section>
 
@@ -601,8 +606,11 @@ export default function IndieHackerPortfolio() {
         <div className="md:hidden">
           <section id="projects" className="py-6 px-4">
             <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-primary">Proyectos Actuales</h2>
-              <p className="text-sm text-foreground">Startups en las que estoy trabajando actualmente</p>
+              <h2 className="font-heading font-bold text-xl mb-2 text-primary">Projects</h2>
+              <p className="text-sm text-foreground">
+                Things I've Built - A collection of projects spanning AI, machine learning, product development and SaaS
+                applications.
+              </p>
             </div>
 
             <div className="space-y-4">
@@ -624,10 +632,10 @@ export default function IndieHackerPortfolio() {
                     <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3 pt-4">
-                    <div className="space-y-1">
+                    <div className="space-y-2">
                       <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
                         <DollarSign className="w-3 h-3" />
-                        <span>{project.Objective}</span>
+                        <span>{project.objective}</span>
                       </div>
                       <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
                         <Users className="w-3 h-3" />
@@ -640,43 +648,10 @@ export default function IndieHackerPortfolio() {
             </div>
           </section>
 
-          <section className="py-8 px-4 bg-card/30">
-            <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-secondary">Proyectos Anteriores</h2>
-              <p className="text-sm text-foreground">Experiencias pasadas que moldearon mi journey como indie hacker</p>
-            </div>
-
-            <div className="space-y-4">
-              {previousProjects.map((project, index) => (
-                <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-2">
-                  <CardHeader>
-                    <div className="flex items-center space-x-3">
-                      <project.icon className={`w-5 h-5 ${project.color}`} />
-                      <div>
-                        <CardTitle className={`font-heading text-base group-hover:${project.color} transition-colors`}>
-                          {project.title}
-                        </CardTitle>
-                        <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div className={`text-sm font-medium ${project.color}`}>{project.outcome}</div>
-                      <div className="text-sm text-muted-foreground">{project.metrics}</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
-
           <section id="experience" className="py-8 px-4">
             <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-accent">Mi Journey</h2>
-              <p className="text-sm text-foreground">
-                Cómo evolucione de desarrollador a indie hacker y constructor de productos
-              </p>
+              <h2 className="font-heading font-bold text-xl mb-2 text-accent">My Journey</h2>
+              <p className="text-sm text-foreground">Previous work experiences</p>
             </div>
 
             <div className="space-y-4">
@@ -717,7 +692,7 @@ export default function IndieHackerPortfolio() {
 
           <section id="education" className="py-8 px-4 bg-card/30">
             <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-accent">Formación</h2>
+              <h2 className="font-heading font-bold text-xl mb-2 text-accent">Education</h2>
             </div>
 
             <Card className="hover:shadow-lg transition-all duration-300 border-2">
@@ -725,16 +700,20 @@ export default function IndieHackerPortfolio() {
                 <div className="flex items-center space-x-3">
                   <GraduationCap className="w-6 h-6 text-accent" />
                   <div>
-                    <CardTitle className="font-heading text-base">Ingeniería Informática</CardTitle>
+                    <CardTitle className="font-heading text-base">Bachelor's Degree in Applied Mathematics</CardTitle>
                     <CardDescription className="text-sm font-medium mt-1 text-foreground/80">
-                      Universidad Politécnica de Madrid • 2016-2020
+                      Universidad Nacional de Córdoba • 2021-Present
                     </CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-foreground/80">
-                  Especialización en Desarrollo de Software y Sistemas Distribuidos
+                  Comprehensive mathematical foundation with specialized focus on data science, computer science, and
+                  artificial intelligence. Core curriculum included: Advanced Algorithms & Data Structures, Neural
+                  Networks & Deep Learning, Differential Equations, Probability & Statistics, Bayesian Theory, Numerical
+                  Analysis, Algorithm Design & Complexity Theory, Operations Research, Mathematical Modeling,
+                  Quantitative Finance, Machine Learning, and Computational Simulation & Modeling.
                 </p>
               </CardContent>
             </Card>
@@ -744,21 +723,24 @@ export default function IndieHackerPortfolio() {
             <div className="text-center">
               <h2 className="font-heading font-bold text-xl mb-3 text-primary">¿Listo para construir algo épico?</h2>
               <p className="text-sm text-foreground mb-6">
-                Siempre abierto a colaborar en proyectos innovadores, mentoría en indie hacking, o simplemente charlar
-                sobre startups y tecnología.
+                Siempre abierto a colaborar en proyectos innovadores, conectar con personas, o simplemente charlar sobre
+                startups y tecnología.
               </p>
               <div className="flex flex-col gap-3">
-                <Button size="default" className="font-medium border-2">
+                <Button
+                  size="default"
+                  className="font-medium border-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
                   <Mail className="w-4 h-4 mr-2" />
-                  alex.rodriguez@indiedev.com
+                  pedrosalomonee@gmail.com
                 </Button>
                 <Button
                   variant="outline"
                   size="default"
-                  className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent"
+                  className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent hover:scale-105 transition-all duration-300"
                 >
                   <Linkedin className="w-4 h-4 mr-2" />
-                  LinkedIn
+                  Conectar en LinkedIn
                 </Button>
               </div>
             </div>
@@ -766,9 +748,7 @@ export default function IndieHackerPortfolio() {
 
           <footer className="py-6 px-4 border-t border-primary/20 bg-background">
             <div className="text-center text-foreground/60">
-              <p className="text-sm">
-                &copy; 2024 Alex Rodríguez. Construido con ❤️ y mucho ☕ usando Next.js y Tailwind CSS.
-              </p>
+              <p className="text-sm">&copy; 2025 Pedro Salomone. Construido con v0 by Vercel.</p>
             </div>
           </footer>
         </div>
