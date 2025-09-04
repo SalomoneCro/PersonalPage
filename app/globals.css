@@ -4,24 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated to retro gaming palette with charcoal background, neon green, and retro orange */
-  --background: #939090; /* charcoal background */
-  --foreground: #004a1e; /* neon terminal green text */
-  --card: #898585; /* slightly lighter charcoal for cards */
-  --card-foreground: #00ff66; /* neon green text on cards */
-  --popover-foreground: #00ff66; /* neon green */
-  --primary: #00ff66; /* neon terminal green */
-  --primary-foreground: #121212; /* charcoal text on green */
-  --secondary: #004a1e; /* retro orange */
-  --secondary-foreground: #121212; /* charcoal text on orange */
-  --muted: #2a2a2a; /* muted charcoal */
-  --muted-foreground: #000000; /* muted green */
-  --accent: #004a1e; /* retro orange accent */
-  --accent-foreground: #121212; /* charcoal text on orange */
-  --destructive: #ff4444; /* bright red for errors */
-  --destructive-foreground: #121212; /* charcoal */
-  --border: #333333; /* dark border */
+  /* Paleta sobria con fondo crema claro */
+  --background: #faf7f2; /* crema muy claro */
+  --foreground: #2c2c2c; /* texto principal gris oscuro */
+  --card: #ffffff; /* tarjetas sobre fondo */
+  --card-foreground: #2c2c2c; /* texto en tarjetas */
+  --popover-foreground: #2c2c2c; /* texto en popovers */
+  --primary: #3a5a78; /* azul grisáceo sobrio */
+  --primary-foreground: #ffffff; /* texto sobre primary */
+  --secondary: #6d6d6d; /* gris medio */
+  --secondary-foreground: #ffffff; /* texto sobre secondary */
+  --muted: #e8e5de; /* variante suave del fondo */
+  --muted-foreground: #4a4a4a; /* texto en muted */
+  --accent: #3a5a78; /* acento azul grisáceo */
+  --accent-foreground: #ffffff; /* texto sobre acento */
+  --destructive: #c0392b; /* rojo sobrio */
+  --destructive-foreground: #ffffff; /* texto sobre error */
+  --border: #d4d0c9; /* borde suave */
   --radius: 0.5rem;
+
   --font-dm-sans: "DM Sans", sans-serif;
   --font-space-grotesk: "Space Grotesk", sans-serif;
   --font-geist-mono: "Geist Mono", monospace;

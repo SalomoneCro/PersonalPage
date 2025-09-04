@@ -58,24 +58,21 @@ export default function IndieHackerPortfolio() {
 
   const previousProjects = [
     {
-      title: "FitTracker App",
-      description: "App móvil para seguimiento de ejercicios (vendida en 2023)",
-      outcome: "Vendida por €15K",
-      tech: ["React Native", "Firebase"],
-      metrics: "2K+ usuarios activos",
+      title: "Data Scientist trainee",
+      description: "Trabajé en una startup especializada en inversiones usando inteligencia artificial",
+      outcome: "Aprendi a trabajar en una organización",
       icon: Target,
       color: "text-primary",
-      year: "2023",
+      year: "2024",
     },
     {
-      title: "Newsletter Automation",
-      description: "Herramienta de automatización de newsletters (cerrada)",
-      outcome: "Aprendizaje clave: validación de mercado",
-      tech: ["Node.js", "SendGrid"],
-      metrics: "100 usuarios beta",
-      icon: Mail,
+      title: "Snowboard Instructor",
+      description: "Trabajé como instrucor de snowboard en Windham, Nueva York",
+      outcome: "Me divertí como nunca!",
+      metrics: "+100 alumnos",
+      icon: Mountain,
       color: "text-secondary",
-      year: "2022",
+      year: "2022-2025",
     },
   ]
 
@@ -440,10 +437,10 @@ export default function IndieHackerPortfolio() {
             <section className="py-12 px-6 bg-card/30">
               <div className="mb-8">
                 <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-secondary">
-                  Proyectos Anteriores
+                  Experiencias Profesionales
                 </h2>
                 <p className="text-base text-foreground">
-                  Experiencias pasadas que moldearon mi journey como indie hacker
+                  Experiencias pasadas que moldearon mi camino
                 </p>
               </div>
 
@@ -471,18 +468,6 @@ export default function IndieHackerPortfolio() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech, techIndex) => (
-                            <Badge
-                              key={tech}
-                              variant="outline"
-                              className="text-xs hover:scale-105 transition-transform duration-200"
-                              style={{ animationDelay: `${techIndex * 50}ms` }}
-                            >
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
                         <div className={`text-sm font-medium ${project.color}`}>{project.outcome}</div>
                         <div className="text-sm text-muted-foreground">
                           {project.metrics} • {project.year}
@@ -548,16 +533,16 @@ export default function IndieHackerPortfolio() {
                   <div className="flex items-center space-x-4">
                     <GraduationCap className="w-8 h-8 text-accent" />
                     <div>
-                      <CardTitle className="font-heading text-xl">Ingeniería Informática</CardTitle>
+                      <CardTitle className="font-heading text-xl">Licenciatura en Matemática Aplicada</CardTitle>
                       <CardDescription className="text-base font-medium mt-1 text-foreground/80">
-                        Universidad Politécnica de Madrid • 2016-2020
+                        Universidad Nacional de Córdoba • 2021-Presente
                       </CardDescription>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <p className="text-base text-foreground/80">
-                    Especialización en Desarrollo de Software y Sistemas Distribuidos
+                    Especialización en Estadística, Matemática e Inteligencia Arificial
                   </p>
                 </CardContent>
               </Card>
@@ -569,7 +554,7 @@ export default function IndieHackerPortfolio() {
                   ¿Listo para construir algo épico?
                 </h2>
                 <p className="text-base text-foreground mb-6">
-                  Siempre abierto a colaborar en proyectos innovadores, mentoría en indie hacking, o simplemente charlar
+                  Siempre abierto a colaborar en proyectos innovadores, conectar con personas, o simplemente charlar
                   sobre startups y tecnología.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -578,7 +563,7 @@ export default function IndieHackerPortfolio() {
                     className="font-medium border-2 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
                   >
                     <Mail className="w-5 h-5 mr-2" />
-                    alex.rodriguez@indiedev.com
+                    pedrosalomonee@gmail.com
                   </Button>
                   <Button
                     variant="outline"
@@ -594,8 +579,7 @@ export default function IndieHackerPortfolio() {
 
             <footer className="py-6 px-6 border-t border-primary/20 bg-background">
               <div className="text-center text-foreground/60">
-                <p>&copy; 2024 Alex Rodríguez. Construido con ❤️ y mucho ☕ usando Next.js y Tailwind CSS.</p>
-                <p className="text-sm mt-2 text-primary">Keep building, keep shipping! 🚀</p>
+                <p>&copy; 2025 Pedro Salomone. Construido con v0 by Vercel.</p>
               </div>
             </footer>
           </div>
@@ -666,13 +650,6 @@ export default function IndieHackerPortfolio() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      <div className="flex flex-wrap gap-1">
-                        {project.tech.map((tech) => (
-                          <Badge key={tech} variant="outline" className="text-xs">
-                            {tech}
-                          </Badge>
-                        ))}
-                      </div>
                       <div className={`text-sm font-medium ${project.color}`}>{project.outcome}</div>
                       <div className="text-sm text-muted-foreground">{project.metrics}</div>
                     </div>
@@ -780,7 +757,6 @@ export default function IndieHackerPortfolio() {
               <p className="text-sm">
                 &copy; 2024 Alex Rodríguez. Construido con ❤️ y mucho ☕ usando Next.js y Tailwind CSS.
               </p>
-              <p className="text-xs mt-2 text-primary">Keep building, keep shipping! 🚀</p>
             </div>
           </footer>
         </div>
