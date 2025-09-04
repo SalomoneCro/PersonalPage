@@ -35,25 +35,25 @@ export default function IndieHackerPortfolio() {
 
   const currentProjects = [
     {
-      title: "Outsiders",
-      description: "App de seguimiento de progreso de Snowboarders profesionales",
-      status: "MVP lanzado",
-      Objective: "Explotar rendimiento de atletas extremos basandose en datos",
-      users: "Beta con un equipo de 5 profesionales y su coach",
-      icon: Mountain,
-      color: "text-primary",
-      bgColor: "bg-primary/10",
+    title: "Outsiders",
+    description: "Progress tracking app for professional snowboarders",
+    status: "MVP launched",
+    objective: "Enhance extreme athletes' performance through data-driven insights",
+    users: "Beta with a team of 5 professionals and their coach",
+    icon: Mountain,
+    color: "text-primary",
+    bgColor: "bg-primary/10",
     },
     {
-      title: "CanchaYa",
-      description: "App de gestion de canchas de basquet",
-      status: "Validando idea",
-      Objective: "Tener una plataforma que centraliza todos los turnos y canchas de basquet de la ciudad de Córdoba",
-      users: "0 usuarios",
-      icon: Rocket,
-      color: "text-primary",
-      bgColor: "bg-primary/10",
-    },
+    title: "Lugarcito",
+    description: "Co-founded carpooling platform solving transportation challenges in Central and Southeast Córdoba Province, Argentina",
+    status: "Closed",
+    objective: "Connect drivers and passengers to reduce transportation costs and improve mobility access in underserved areas",
+    users: "Built from scratch: database architecture, matching algorithms, and route optimization using graph theory for maximum efficiency. Led social media marketing, creating content and editing promotional videos",
+    icon: Rocket,
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    }
   ]
 
   const previousProjects = [
@@ -78,33 +78,48 @@ export default function IndieHackerPortfolio() {
 
   const experience = [
     {
-      role: "Indie Hacker & Product Builder",
-      company: "Proyectos Propios",
-      period: "2022 - Presente",
-      location: "Madrid, España (Remoto)",
+      role: "Data Scientist",
+      company: "Lightstorm.ai",
+      period: "2024",
+      location: "Madrid, Spain (Remote)",
       achievements: [
-        "Construí y lancé 5 productos SaaS, 2 con ingresos recurrentes",
-        "Generé €25K+ en ingresos totales de productos digitales",
-        "Crecí audiencia en Twitter a 3K+ seguidores en nicho tech",
-        "Validé 10+ ideas de producto usando técnicas lean startup",
+        "Developed an internal library following software engineering best practices",
+        "Built a data-driven solution from scratch to address a critical startup problem",
+        "Applied both software engineering and data science skills in real-world projects",
       ],
+
       icon: Rocket,
       color: "text-primary",
     },
     {
-      role: "Freelance Full-Stack Developer",
-      company: "Clientes Diversos",
-      period: "2020 - 2022",
-      location: "España",
+      role: "Product Developer & Entrepreneur",
+      company: "Independent Projects",
+      period: "2025",
+      location: "Córdoba, Argentina",
       achievements: [
-        "Desarrollé 15+ MVPs para startups en fase temprana",
-        "Ayudé a 3 startups a conseguir financiación seed (€500K+ total)",
-        "Especialización en desarrollo rápido de prototipos",
-        "Rate promedio: €75/hora con 98% satisfacción cliente",
+        "Conducted market research and user validation for multiple SaaS concepts",
+        "Built functional web applications using AI-assisted development tools (v0) with database integration",
+        "Implemented user authentication systems and API integrations using modern stack (Supabase, Google OAuth)",
+        "Engaged in end-to-end product development from ideation to customer discovery and go-to-market strategies",
+        "Demonstrated technical adaptability by rapidly learning and applying new technologies to solve product needs",
       ],
-      icon: Code,
-      color: "text-secondary",
+
+      icon: Rocket,
+      color: "text-primary",
     },
+    {
+      role: "Snowboard and Ski Instructor",
+      company: "Windham Mountain Club",
+      period: "2 seasons",
+      location: "New York State, USA",
+      achievements: [
+        "Taught snowboarding and ski to diverse groups in English, adapting communication style to different skill levels",
+        "Developed strong interpersonal and leadership skills in high-pressure, safety-critical environments",
+        "Demonstrated cultural adaptability and independence working internationally",
+      ],
+      icon: Mountain,
+      color: "text-primary",
+    }
   ]
 
   const useStaggeredAnimation = (itemCount: number) => {
@@ -186,7 +201,7 @@ export default function IndieHackerPortfolio() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="font-heading font-bold text-lg text-primary hover:text-primary/80 transition-colors cursor-pointer">
-              IndieHacker.dev
+              Pedro Salomone
             </div>
             <div className="hidden md:flex items-center space-x-6">
               {[
@@ -373,117 +388,12 @@ export default function IndieHackerPortfolio() {
 
           {/* Scrollable Content */}
           <div className="ml-[33.333333%] w-2/3 min-h-screen">
-            <section id="projects" className="py-8 px-6">
-              <div className="mb-6">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-primary">Proyectos Actuales</h2>
-                <p className="text-base text-foreground">Startups en las que estoy trabajando actualmente</p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {currentProjects.map((project, index) => (
-                  <Card
-                    key={index}
-                    className={`group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 border-2 cursor-pointer overflow-hidden ${
-                      animatedCurrentProjects.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                    }`}
-                    style={{ transitionDelay: `${index * 150}ms` }}
-                  >
-                    <CardHeader className={`${project.bgColor} transition-all duration-300 relative`}>
-                      <div className="flex items-center justify-between">
-                        <project.icon
-                          className={`w-6 h-6 ${project.color} group-hover:scale-110 transition-transform duration-300`}
-                        />
-                        <Badge
-                          variant="outline"
-                          className={`${project.color} border-current text-xs hover:bg-current hover:text-background transition-colors`}
-                        >
-                          {project.status}
-                        </Badge>
-                      </div>
-                      <CardTitle className={`font-heading text-lg group-hover:${project.color} transition-colors`}>
-                        {project.title}
-                      </CardTitle>
-                      <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
-
-                      <div className="mt-3">
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-3 pt-4">
-                      <div className="space-y-2">
-                        <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                          <DollarSign className="w-3 h-3" />
-                          <span>{project.Objective}</span>
-                        </div>
-                        <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                          <Users className="w-3 h-3" />
-                          <span>{project.users}</span>
-                        </div>
-                      </div>
-
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className={`w-full mt-3 ${project.color} hover:bg-current hover:text-background opacity-0 group-hover:opacity-100 transition-all duration-300`}
-                      >
-                        Ver detalles
-                        <ExternalLink className="w-3 h-3 ml-2" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
-
-            <section className="py-12 px-6 bg-card/30">
-              <div className="mb-8">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-secondary">
-                  Experiencias Profesionales
-                </h2>
-                <p className="text-base text-foreground">
-                  Experiencias pasadas que moldearon mi camino
-                </p>
-              </div>
-
-              <div className="grid gap-6">
-                {previousProjects.map((project, index) => (
-                  <Card
-                    key={index}
-                    className={`group hover:shadow-xl transition-all duration-500 border-2 overflow-hidden ${
-                      animatedPreviousProjects.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                    }`}
-                    style={{ transitionDelay: `${index * 150}ms` }}
-                  >
-                    <CardHeader>
-                      <div className="flex items-center space-x-4">
-                        <project.icon
-                          className={`w-6 h-6 ${project.color} group-hover:scale-110 transition-transform duration-300`}
-                        />
-                        <div>
-                          <CardTitle className={`font-heading group-hover:${project.color} transition-colors`}>
-                            {project.title}
-                          </CardTitle>
-                          <CardDescription className="text-foreground/80">{project.description}</CardDescription>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className={`text-sm font-medium ${project.color}`}>{project.outcome}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {project.metrics} • {project.year}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </section>
 
             <section id="experience" className="py-12 px-6">
               <div className="mb-8">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">Mi Journey</h2>
+                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">My Journey</h2>
                 <p className="text-base text-foreground">
-                  Cómo evolucione de desarrollador a indie hacker y constructor de productos
+                  Previous work experiences
                 </p>
               </div>
 
@@ -522,6 +432,68 @@ export default function IndieHackerPortfolio() {
                 ))}
               </div>
             </section>
+
+            <section id="projects" className="py-8 px-6">
+              <div className="mb-6">
+                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-primary">Projects</h2>
+                <p className="text-base text-foreground">Things I've Built - A collection of projects spanning AI, machine learning, product development and SaaS applications.</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {currentProjects.map((project, index) => (
+                  <Card
+                    key={index}
+                    className={`group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 border-2 cursor-pointer overflow-hidden ${
+                      animatedCurrentProjects.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                    }`}
+                    style={{ transitionDelay: `${index * 150}ms` }}
+                  >
+                    <CardHeader className={`${project.bgColor} transition-all duration-300 relative`}>
+                      <div className="flex items-center justify-between">
+                        <project.icon
+                          className={`w-6 h-6 ${project.color} group-hover:scale-110 transition-transform duration-300`}
+                        />
+                        <Badge
+                          variant="outline"
+                          className={`${project.color} border-current text-xs hover:bg-current hover:text-background transition-colors`}
+                        >
+                          {project.status}
+                        </Badge>
+                      </div>
+                      <CardTitle className={`font-heading text-lg group-hover:${project.color} transition-colors`}>
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
+
+                      <div className="mt-3">
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-3 pt-4">
+                      <div className="space-y-2">
+                        <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
+                          <DollarSign className="w-3 h-3" />
+                          <span>{project.objective}</span>
+                        </div>
+                        <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
+                          <Users className="w-3 h-3" />
+                          <span>{project.users}</span>
+                        </div>
+                      </div>
+
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className={`w-full mt-3 ${project.color} hover:bg-current hover:text-background opacity-0 group-hover:opacity-100 transition-all duration-300`}
+                      >
+                        Ver detalles
+                        <ExternalLink className="w-3 h-3 ml-2" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+
 
             <section id="education" className="py-12 px-6 bg-card/30">
               <div className="mb-8">
