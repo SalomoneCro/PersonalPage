@@ -35,14 +35,14 @@ export default function IndieHackerPortfolio() {
 
   const currentProjects = [
     {
-    title: "Outsiders",
-    description: "Progress tracking app for professional snowboarders",
-    status: "MVP launched",
-    objective: "Enhance extreme athletes' performance through data-driven insights",
-    users: "Beta with a team of 5 professionals and their coach",
-    icon: Mountain,
-    color: "text-primary",
-    bgColor: "bg-primary/10",
+      title: "Outsiders",
+      description: "Progress tracking app for professional snowboarders",
+      status: "MVP launched",
+      objective: "Help athletes and coaches track training progress and performance metrics",
+      users: "Beta tested with a small team of professional snowboarders and their coach, gathering feedback on usability and feature requirements",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
     },
     {
     title: "Lugarcito",
@@ -51,6 +51,46 @@ export default function IndieHackerPortfolio() {
     objective: "Connect drivers and passengers to reduce transportation costs and improve mobility access in underserved areas",
     users: "Built from scratch: database architecture, matching algorithms, and route optimization using graph theory for maximum efficiency. Led social media marketing, creating content and editing promotional videos",
     icon: Rocket,
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    },
+    {
+    title: "Stock Trading Robots",
+    description: "Built intelligent algorithmic trading systems using advanced machine learning techniques",
+    status: "Research Phase",
+    objective: "Develop automated trading strategies through reinforcement learning and time series forecasting models",
+    users: "Successfully outperformed market benchmarks in backtesting across multiple approaches, including Proximal Policy Optimization (PPO) and Dynamic Mode Decomposition (DMD)",
+    icon: Mountain,
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    },
+    {
+    title: "Stock Trading Robots",
+    description: "Built intelligent algorithmic trading systems using advanced machine learning techniques",
+    status: "Research Phase",
+    objective: "Develop automated trading strategies through reinforcement learning and time series forecasting models",
+    users: "Successfully outperformed market benchmarks in backtesting across multiple approaches, including Proximal Policy Optimization (PPO) and Dynamic Mode Decomposition (DMD)",
+    icon: Mountain,
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    },
+    {
+    title: "AI Legal Document Summarization",
+    description: "Built an automated system for generating judicial case summaries using Large Language Models for Córdoba Provincial Courts",
+    status: "Research Complete - Awaiting Expert Validation",
+    objective: "Automate metadata extraction and synopsis generation from legal documents to reduce manual workload for legal professionals",
+    users: "Developed advanced prompting techniques (Chain of Thought, Few-Shot) and implemented quantization for efficient processing on limited hardware. Successfully processed complex legal texts without hallucinations using Llama-3.2-11B-Vision-Instruct model",
+    icon: Mountain,
+    color: "text-primary",
+    bgColor: "bg-primary/10",
+    },
+    {
+    title: "AI Recommendation System for E-commerce Sellers",
+    description: "Developing advanced recommendation system using Reinforcement Learning and Transformers to suggest actionable strategies for e-commerce sellers (ongoing thesis project)",
+    status: "In Development - Thesis Project",
+    objective: "Design RL-based system that suggests strategic actions to sellers (pricing, advertising, promotions) optimizing long-term business metrics rather than immediate recommendations",
+    users: "Currently working with MercadoLibre's ($MELI) ML Technical Leader. Implementing Decision Transformer and variants (RLT4Rec, Retentive DT) with offline RL techniques. Comparing against traditional baselines (GRU4Rec, SASRec, BERT4Rec) using real e-commerce data",
+    icon: Mountain,
     color: "text-primary",
     bgColor: "bg-primary/10",
     }
@@ -171,7 +211,7 @@ export default function IndieHackerPortfolio() {
   }, [])
 
   const [typedText, setTypedText] = useState("")
-  const fullText = "Estudiante y Emprendedor"
+  const fullText = "Data Scientist & Product Developer"
 
   useEffect(() => {
     let index = 0
@@ -275,7 +315,7 @@ export default function IndieHackerPortfolio() {
               </div>
 
               <h1 className="font-heading font-bold text-xl text-balance">
-                Hola, soy <span className="text-primary">Pedro Salomone!</span>
+                Hey, I'm <span className="text-primary">Pedro Salomone!</span>
               </h1>
 
               <p className="text-base text-secondary font-medium min-h-[24px]">
@@ -284,8 +324,7 @@ export default function IndieHackerPortfolio() {
               </p>
 
               <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">
-                Siempre que emprendí online fracasé. 
-                A cuántos fracasos estaré de mi primer éxito? 
+                Applied Mathematics student with hands-on experience in machine learning, product development, and sales. I combine strong mathematical foundations with practical development skills, having built multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from legal document automation to algorithmic trading systems. My goal is to leverage data science and AI to solve complex business problems.
               </p>
             </div>
 
@@ -337,18 +376,17 @@ export default function IndieHackerPortfolio() {
                   <span>Construyendo</span>
                 </div>
 
-                <h1 className="font-heading font-bold text-2xl lg:text-3xl text-balance">
-                  Hola, soy <span className="text-primary hover:text-primary/80 transition-colors">Pedro Salomone!</span>
+                <h1 className="font-heading font-bold text-xl text-balance">
+                  Hey, I'm <span className="text-primary">Pedro Salomone!</span>
                 </h1>
 
-                <p className="text-lg text-secondary font-medium min-h-[28px]">
+                <p className="text-base text-secondary font-medium min-h-[24px]">
                   {typedText}
                   <span className="animate-pulse">|</span>
                 </p>
 
-                <p className="text-sm text-foreground leading-relaxed">
-                  Siempre que emprendí online fracasé. 
-                  A cuántos fracasos estaré de mi primer éxito? 
+                <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">
+                  Applied Mathematics student with hands-on experience in machine learning, product development, and sales. I combine strong mathematical foundations with practical development skills, having built multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from legal document automation to algorithmic trading systems. My goal is to leverage data science and AI to solve complex business problems.
                 </p>
               </div>
 
@@ -497,26 +535,28 @@ export default function IndieHackerPortfolio() {
 
             <section id="education" className="py-12 px-6 bg-card/30">
               <div className="mb-8">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">Formación</h2>
+                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">Education</h2>
               </div>
 
               <Card className="hover:shadow-lg transition-all duration-300 border-2">
-                <CardHeader>
-                  <div className="flex items-center space-x-4">
-                    <GraduationCap className="w-8 h-8 text-accent" />
-                    <div>
-                      <CardTitle className="font-heading text-xl">Licenciatura en Matemática Aplicada</CardTitle>
-                      <CardDescription className="text-base font-medium mt-1 text-foreground/80">
-                        Universidad Nacional de Córdoba • 2021-Presente
-                      </CardDescription>
-                    </div>
+              <CardHeader>
+                <div className="flex items-center space-x-4">
+                  <GraduationCap className="w-8 h-8 text-accent" />
+                  <div>
+                    <CardTitle className="font-heading text-xl">Bachelor's Degree in Applied Mathematics</CardTitle>
+                    <CardDescription className="text-base font-medium mt-1 text-foreground/80">
+                      Universidad Nacional de Córdoba • 2021-Present
+                    </CardDescription>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-base text-foreground/80">
-                    Especialización en Estadística, Matemática e Inteligencia Arificial
-                  </p>
-                </CardContent>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-base text-foreground/80">
+                  Comprehensive mathematical foundation with specialized focus on data science, computer science, and artificial intelligence. Core curriculum included: Advanced Algorithms & Data Structures, Neural Networks & Deep Learning, Differential Equations, Probability & Statistics, Bayesian Theory, Numerical Analysis, Algorithm Design & Complexity Theory, Operations Research, Mathematical Modeling, Quantitative Finance, Machine Learning, and Computational Simulation & Modeling. 
+                  <br />
+                  This rigorous program provided both theoretical depth and practical skills for solving real-world problems through mathematical and computational approaches.  
+                </p>
+              </CardContent>
               </Card>
             </section>
 
