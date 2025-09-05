@@ -21,20 +21,104 @@ import {
   X,
   ExternalLink,
   Mountain,
+  Globe,
 } from "lucide-react"
 
+const content = {
+  en: {
+    nav: {
+      home: "Home",
+      projects: "Projects",
+      experience: "Experience",
+      contact: "Contact",
+    },
+    hero: {
+      location: "Argentina",
+      building: "Building",
+      greeting: "Hey, I'm Pedro Salomone!",
+      role: "Data Scientist & Product Developer",
+      description:
+        "Applied Mathematics student with hands-on experience in machine learning, product development, and sales. I combine strong mathematical foundations with practical development skills, having built multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from legal document automation to algorithmic trading systems. My goal is to leverage data science and AI to solve complex business problems.",
+    },
+    sections: {
+      journey: "My Journey",
+      journeyDesc: "Previous work experiences",
+      projects: "Projects",
+      projectsDesc:
+        "Things I've Built - A collection of projects spanning AI, machine learning, product development and SaaS applications.",
+      education: "Education",
+      contact: "Ready to build something epic?",
+      contactDesc:
+        "Always open to collaborate on innovative projects, connect with people, or simply chat about startups and technology.",
+    },
+    projects: {
+      viewDetails: "View details",
+      status: {
+        mvp: "MVP launched",
+        closed: "Closed",
+        research: "Research Phase",
+        awaiting: "Research Complete - Awaiting Expert Validation",
+        development: "In Development - Thesis Project",
+      },
+    },
+    footer: "Built with v0 by Vercel.",
+  },
+  es: {
+    nav: {
+      home: "Inicio",
+      projects: "Proyectos",
+      experience: "Experiencia",
+      contact: "Contacto",
+    },
+    hero: {
+      location: "Argentina",
+      building: "Construyendo",
+      greeting: "¡Hola, soy Pedro Salomone!",
+      role: "Científico de Datos y Desarrollador de Productos",
+      description:
+        "Estudiante de Matemática Aplicada con experiencia práctica en aprendizaje automático, desarrollo de productos y ventas. Combino sólidos fundamentos matemáticos con habilidades de desarrollo prácticas, habiendo construido múltiples aplicaciones SaaS usando herramientas modernas asistidas por IA y trabajado en proyectos de IA de vanguardia desde automatización de documentos legales hasta sistemas de trading algorítmico. Mi objetivo es aprovechar la ciencia de datos y la IA para resolver problemas empresariales complejos.",
+    },
+    sections: {
+      journey: "Mi Trayectoria",
+      journeyDesc: "Experiencias laborales previas",
+      projects: "Proyectos",
+      projectsDesc:
+        "Cosas que he construido - Una colección de proyectos que abarcan IA, aprendizaje automático, desarrollo de productos y aplicaciones SaaS.",
+      education: "Educación",
+      contact: "¿Listo para construir algo épico?",
+      contactDesc:
+        "Siempre abierto a colaborar en proyectos innovadores, conectar con personas, o simplemente charlar sobre startups y tecnología.",
+    },
+    projects: {
+      viewDetails: "Ver detalles",
+      status: {
+        mvp: "MVP lanzado",
+        closed: "Cerrado",
+        research: "Fase de Investigación",
+        awaiting: "Investigación Completa - Esperando Validación de Expertos",
+        development: "En Desarrollo - Proyecto de Tesis",
+      },
+    },
+    footer: "Construido con v0 by Vercel.",
+  },
+}
+
 export default function IndieHackerPortfolio() {
+  const [language, setLanguage] = useState<"en" | "es">("en")
   const [isVisible, setIsVisible] = useState(false)
   const [activeSection, setActiveSection] = useState("hero")
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
+  const [isScrolled, setIsScrolled] = useState(false)
   const observerRef = useRef<IntersectionObserver | null>(null)
+
+  const t = content[language]
 
   const currentProjects = [
     {
       title: "Outsiders",
       description: "Progress tracking app for professional snowboarders",
-      status: "MVP launched",
+      status: t.projects.status.mvp,
       objective: "Help athletes and coaches track training progress and performance metrics",
       users:
         "Beta tested with a small team of professional snowboarders and their coach, gathering feedback on usability and feature requirements",
@@ -46,7 +130,7 @@ export default function IndieHackerPortfolio() {
       title: "Lugarcito",
       description:
         "Co-founded carpooling platform solving transportation challenges in Central and Southeast Córdoba Province, Argentina",
-      status: "Closed",
+      status: t.projects.status.closed,
       objective:
         "Connect drivers and passengers to reduce transportation costs and improve mobility access in underserved areas",
       users:
@@ -58,7 +142,7 @@ export default function IndieHackerPortfolio() {
     {
       title: "Stock Trading Robots",
       description: "Built intelligent algorithmic trading systems using advanced machine learning techniques",
-      status: "Research Phase",
+      status: t.projects.status.research,
       objective:
         "Develop automated trading strategies through reinforcement learning and time series forecasting models",
       users:
@@ -71,7 +155,7 @@ export default function IndieHackerPortfolio() {
       title: "AI Legal Document Summarization",
       description:
         "Built an automated system for generating judicial case summaries using Large Language Models for Córdoba Provincial Courts",
-      status: "Research Complete - Awaiting Expert Validation",
+      status: t.projects.status.awaiting,
       objective:
         "Automate metadata extraction and synopsis generation from legal documents to reduce manual workload for legal professionals",
       users:
@@ -84,7 +168,7 @@ export default function IndieHackerPortfolio() {
       title: "AI Recommendation System for E-commerce Sellers",
       description:
         "Developing advanced recommendation system using Reinforcement Learning and Transformers to suggest actionable strategies for e-commerce sellers (ongoing thesis project)",
-      status: "In Development - Thesis Project",
+      status: t.projects.status.development,
       objective:
         "Design RL-based system that suggests strategic actions to sellers (pricing, advertising, promotions) optimizing long-term business metrics rather than immediate recommendations",
       users:
@@ -183,6 +267,13 @@ export default function IndieHackerPortfolio() {
   useEffect(() => {
     setIsVisible(true)
 
+    const handleScroll = () => {
+      const scrollTop = window.scrollY
+      setIsScrolled(scrollTop > 50)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
     observerRef.current = new IntersectionObserver(
       (entries) => {
         const newVisibleSections = new Set(visibleSections)
@@ -203,12 +294,13 @@ export default function IndieHackerPortfolio() {
     sections.forEach((section) => observerRef.current?.observe(section))
 
     return () => {
+      window.removeEventListener("scroll", handleScroll)
       observerRef.current?.disconnect()
     }
   }, [])
 
   const [typedText, setTypedText] = useState("")
-  const fullText = "Data Scientist & Product Developer"
+  const fullText = t.hero.role
 
   useEffect(() => {
     let index = 0
@@ -222,7 +314,7 @@ export default function IndieHackerPortfolio() {
     }, 100)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [fullText])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -234,7 +326,11 @@ export default function IndieHackerPortfolio() {
 
   return (
     <div className="min-h-screen bg-background">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-b border-primary/20 shadow-lg">
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 border-b border-primary/20 shadow-lg transition-all duration-300 ${
+          isScrolled ? "bg-background/80 backdrop-blur-lg" : "bg-background/95 backdrop-blur-lg"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="font-heading font-bold text-lg text-primary hover:text-primary/80 transition-colors cursor-pointer">
@@ -242,10 +338,10 @@ export default function IndieHackerPortfolio() {
             </div>
             <div className="hidden md:flex items-center space-x-6">
               {[
-                { name: "Inicio", id: "hero" },
-                { name: "Proyectos", id: "projects" },
-                { name: "Experiencia", id: "experience" },
-                { name: "Contacto", id: "contact" },
+                { name: t.nav.home, id: "hero" },
+                { name: t.nav.projects, id: "projects" },
+                { name: t.nav.experience, id: "experience" },
+                { name: t.nav.contact, id: "contact" },
               ].map((item) => (
                 <button
                   key={item.name}
@@ -260,6 +356,14 @@ export default function IndieHackerPortfolio() {
                   )}
                 </button>
               ))}
+              <button
+                onClick={() => setLanguage(language === "en" ? "es" : "en")}
+                className="flex items-center space-x-2 px-3 py-1.5 rounded-lg border border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 text-sm font-medium"
+                title={language === "en" ? "Cambiar a Español" : "Switch to English"}
+              >
+                <Globe className="w-4 h-4" />
+                <span className="uppercase font-bold">{language === "en" ? "ES" : "EN"}</span>
+              </button>
             </div>
             <button
               className="md:hidden p-2 text-foreground hover:text-primary transition-colors hover:bg-primary/10 rounded-lg"
@@ -272,10 +376,10 @@ export default function IndieHackerPortfolio() {
             <div className="md:hidden mt-4 pb-4 border-t border-primary/20 animate-in slide-in-from-top-2 duration-300">
               <div className="flex flex-col space-y-3 pt-4">
                 {[
-                  { name: "Inicio", id: "hero" },
-                  { name: "Proyectos", id: "projects" },
-                  { name: "Experiencia", id: "experience" },
-                  { name: "Contacto", id: "contact" },
+                  { name: t.nav.home, id: "hero" },
+                  { name: t.nav.projects, id: "projects" },
+                  { name: t.nav.experience, id: "experience" },
+                  { name: t.nav.contact, id: "contact" },
                 ].map((item, index) => (
                   <button
                     key={item.name}
@@ -288,6 +392,13 @@ export default function IndieHackerPortfolio() {
                     {item.name}
                   </button>
                 ))}
+                <button
+                  onClick={() => setLanguage(language === "en" ? "es" : "en")}
+                  className="flex items-center space-x-2 px-3 py-2 rounded-lg border border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 text-sm font-medium text-left"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>{language === "en" ? "Cambiar a Español" : "Switch to English"}</span>
+                </button>
               </div>
             </div>
           )}
@@ -303,16 +414,17 @@ export default function IndieHackerPortfolio() {
             <div className="text-center space-y-3">
               <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4" />
-                <span>Argentina</span>
+                <span>{t.hero.location}</span>
                 <div className="relative">
                   <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
                   <div className="absolute inset-0 w-2 h-2 bg-secondary rounded-full animate-ping opacity-75"></div>
                 </div>
-                <span>Construyendo</span>
+                <span>{t.hero.building}</span>
               </div>
 
               <h1 className="font-heading font-bold text-xl text-balance">
-                Hey, I'm <span className="text-primary">Pedro Salomone!</span>
+                {t.hero.greeting.split("Pedro Salomone")[0]}
+                <span className="text-primary">Pedro Salomone!</span>
               </h1>
 
               <p className="text-base text-secondary font-medium min-h-[24px]">
@@ -320,21 +432,15 @@ export default function IndieHackerPortfolio() {
                 <span className="animate-pulse">|</span>
               </p>
 
-              <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">
-                Applied Mathematics student with hands-on experience in machine learning, product development, and
-                sales. I combine strong mathematical foundations with practical development skills, having built
-                multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from
-                legal document automation to algorithmic trading systems. My goal is to leverage data science and AI to
-                solve complex business problems.
-              </p>
+              <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">{t.hero.description}</p>
             </div>
 
             <div className="relative gaming-float flex justify-center">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-2xl blur-3xl animate-pulse"></div>
               <div className="absolute inset-2 bg-gradient-to-r from-accent/20 via-primary/20 to-secondary/20 rounded-xl blur-xl"></div>
               <Avatar className="relative w-24 h-24 border-4 border-primary shadow-2xl hover:scale-105 transition-transform duration-300">
-                <AvatarImage src="/placeholder.svg?height=96&width=96" />
-                <AvatarFallback className="text-xl font-heading font-bold bg-card text-primary">AR</AvatarFallback>
+                <AvatarImage src="/profile-picture.jpg" />
+                <AvatarFallback className="text-xl font-heading font-bold bg-card text-primary">PS</AvatarFallback>
               </Avatar>
             </div>
 
@@ -369,16 +475,17 @@ export default function IndieHackerPortfolio() {
               <div className="space-y-4">
                 <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                   <MapPin className="w-4 h-4" />
-                  <span>Argentina</span>
+                  <span>{t.hero.location}</span>
                   <div className="relative">
                     <div className="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
                     <div className="absolute inset-0 w-2 h-2 bg-secondary rounded-full animate-ping opacity-75"></div>
                   </div>
-                  <span>Construyendo</span>
+                  <span>{t.hero.building}</span>
                 </div>
 
                 <h1 className="font-heading font-bold text-xl text-balance">
-                  Hey, I'm <span className="text-primary">Pedro Salomone!</span>
+                  {t.hero.greeting.split("Pedro Salomone")[0]}
+                  <span className="text-primary">Pedro Salomone!</span>
                 </h1>
 
                 <p className="text-base text-secondary font-medium min-h-[24px]">
@@ -386,21 +493,15 @@ export default function IndieHackerPortfolio() {
                   <span className="animate-pulse">|</span>
                 </p>
 
-                <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">
-                  Applied Mathematics student with hands-on experience in machine learning, product development, and
-                  sales. I combine strong mathematical foundations with practical development skills, having built
-                  multiple SaaS applications using modern AI-assisted tools and worked on cutting-edge AI projects from
-                  legal document automation to algorithmic trading systems. My goal is to leverage data science and AI
-                  to solve complex business problems.
-                </p>
+                <p className="text-sm text-foreground leading-relaxed max-w-md mx-auto">{t.hero.description}</p>
               </div>
 
               <div className="relative gaming-float">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 rounded-2xl blur-3xl animate-pulse"></div>
                 <div className="absolute inset-2 bg-gradient-to-r from-accent/20 via-primary/20 to-secondary/20 rounded-xl blur-xl"></div>
                 <Avatar className="relative w-32 h-32 mx-auto border-4 border-primary shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer">
-                  <AvatarImage src="/placeholder.svg?height=128&width=128" />
-                  <AvatarFallback className="text-2xl font-heading font-bold bg-card text-primary">AR</AvatarFallback>
+                  <AvatarImage src="/profile-picture.jpg" />
+                  <AvatarFallback className="text-2xl font-heading font-bold bg-card text-primary">PS</AvatarFallback>
                 </Avatar>
               </div>
 
@@ -417,11 +518,11 @@ export default function IndieHackerPortfolio() {
                     variant="outline"
                     className={`w-10 h-10 p-0 border-${social.color} text-${social.color} hover:bg-${social.color} hover:text-white bg-transparent hover:scale-110 transition-all duration-300 hover:shadow-lg group relative`}
                     style={{ animationDelay: `${index * 100}ms` }}
-                    title={social.label}
+                    title={social.href}
                   >
                     <social.icon className="w-4 h-4" />
                     <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-background border border-primary/20 px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                      {social.label}
+                      {social.href}
                     </div>
                   </Button>
                 ))}
@@ -433,8 +534,8 @@ export default function IndieHackerPortfolio() {
           <div className="ml-[33.333333%] w-2/3 min-h-screen">
             <section id="experience" className="py-12 px-6">
               <div className="mb-8">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">My Journey</h2>
-                <p className="text-base text-foreground">Previous work experiences</p>
+                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">{t.sections.journey}</h2>
+                <p className="text-base text-foreground">{t.sections.journeyDesc}</p>
               </div>
 
               <div className="space-y-6">
@@ -475,11 +576,8 @@ export default function IndieHackerPortfolio() {
 
             <section id="projects" className="py-8 px-6">
               <div className="mb-6">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-primary">Projects</h2>
-                <p className="text-base text-foreground">
-                  Things I've Built - A collection of projects spanning AI, machine learning, product development and
-                  SaaS applications.
-                </p>
+                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-primary">{t.sections.projects}</h2>
+                <p className="text-base text-foreground">{t.sections.projectsDesc}</p>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
@@ -527,7 +625,7 @@ export default function IndieHackerPortfolio() {
                         variant="ghost"
                         className={`w-full mt-3 ${project.color} hover:bg-current hover:text-background opacity-0 group-hover:opacity-100 transition-all duration-300`}
                       >
-                        Ver detalles
+                        {t.projects.viewDetails}
                         <ExternalLink className="w-3 h-3 ml-2" />
                       </Button>
                     </CardContent>
@@ -538,7 +636,7 @@ export default function IndieHackerPortfolio() {
 
             <section id="education" className="py-12 px-6 bg-card/30">
               <div className="mb-8">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">Education</h2>
+                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">{t.sections.education}</h2>
               </div>
 
               <Card className="hover:shadow-lg transition-all duration-300 border-2">
@@ -567,13 +665,8 @@ export default function IndieHackerPortfolio() {
 
             <section id="contact" className="py-12 px-6">
               <div className="text-center">
-                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-4 text-primary">
-                  ¿Listo para construir algo épico?
-                </h2>
-                <p className="text-base text-foreground mb-6">
-                  Siempre abierto a colaborar en proyectos innovadores, conectar con personas, o simplemente charlar
-                  sobre startups y tecnología.
-                </p>
+                <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-4 text-primary">{t.sections.contact}</h2>
+                <p className="text-base text-foreground mb-6">{t.sections.contactDesc}</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
                     size="lg"
@@ -588,7 +681,7 @@ export default function IndieHackerPortfolio() {
                     className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent hover:scale-105 transition-all duration-300"
                   >
                     <Linkedin className="w-5 h-5 mr-2" />
-                    Conectar en LinkedIn
+                    Connect on LinkedIn
                   </Button>
                 </div>
               </div>
@@ -596,7 +689,7 @@ export default function IndieHackerPortfolio() {
 
             <footer className="py-6 px-6 border-t border-primary/20 bg-background">
               <div className="text-center text-foreground/60">
-                <p>&copy; 2025 Pedro Salomone. Construido con v0 by Vercel.</p>
+                <p>&copy; 2025 Pedro Salomone. {t.footer}</p>
               </div>
             </footer>
           </div>
@@ -606,11 +699,8 @@ export default function IndieHackerPortfolio() {
         <div className="md:hidden">
           <section id="projects" className="py-6 px-4">
             <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-primary">Projects</h2>
-              <p className="text-sm text-foreground">
-                Things I've Built - A collection of projects spanning AI, machine learning, product development and SaaS
-                applications.
-              </p>
+              <h2 className="font-heading font-bold text-xl mb-2 text-primary">{t.sections.projects}</h2>
+              <p className="text-sm text-foreground">{t.sections.projectsDesc}</p>
             </div>
 
             <div className="space-y-4">
@@ -650,8 +740,8 @@ export default function IndieHackerPortfolio() {
 
           <section id="experience" className="py-8 px-4">
             <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-accent">My Journey</h2>
-              <p className="text-sm text-foreground">Previous work experiences</p>
+              <h2 className="font-heading font-bold text-xl mb-2 text-accent">{t.sections.journey}</h2>
+              <p className="text-sm text-foreground">{t.sections.journeyDesc}</p>
             </div>
 
             <div className="space-y-4">
@@ -692,7 +782,7 @@ export default function IndieHackerPortfolio() {
 
           <section id="education" className="py-8 px-4 bg-card/30">
             <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-accent">Education</h2>
+              <h2 className="font-heading font-bold text-xl mb-2 text-accent">{t.sections.education}</h2>
             </div>
 
             <Card className="hover:shadow-lg transition-all duration-300 border-2">
@@ -721,11 +811,8 @@ export default function IndieHackerPortfolio() {
 
           <section id="contact" className="py-8 px-4">
             <div className="text-center">
-              <h2 className="font-heading font-bold text-xl mb-3 text-primary">¿Listo para construir algo épico?</h2>
-              <p className="text-sm text-foreground mb-6">
-                Siempre abierto a colaborar en proyectos innovadores, conectar con personas, o simplemente charlar sobre
-                startups y tecnología.
-              </p>
+              <h2 className="font-heading font-bold text-xl mb-3 text-primary">{t.sections.contact}</h2>
+              <p className="text-sm text-foreground mb-6">{t.sections.contactDesc}</p>
               <div className="flex flex-col gap-3">
                 <Button
                   size="default"
@@ -740,7 +827,7 @@ export default function IndieHackerPortfolio() {
                   className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground bg-transparent hover:scale-105 transition-all duration-300"
                 >
                   <Linkedin className="w-4 h-4 mr-2" />
-                  Conectar en LinkedIn
+                  Connect on LinkedIn
                 </Button>
               </div>
             </div>
@@ -748,7 +835,7 @@ export default function IndieHackerPortfolio() {
 
           <footer className="py-6 px-4 border-t border-primary/20 bg-background">
             <div className="text-center text-foreground/60">
-              <p className="text-sm">&copy; 2025 Pedro Salomone. Construido con v0 by Vercel.</p>
+              <p className="text-sm">&copy; 2025 Pedro Salomone. {t.footer}</p>
             </div>
           </footer>
         </div>
