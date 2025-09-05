@@ -328,7 +328,7 @@ export default function IndieHackerPortfolio() {
     <div className="min-h-screen bg-background">
       <nav
         className={`fixed top-0 left-0 right-0 z-50 border-b border-primary/20 shadow-lg transition-all duration-300 ${
-          isScrolled ? "bg-background/80 backdrop-blur-lg" : "bg-background/95 backdrop-blur-lg"
+          isScrolled ? "bg-background/10 backdrop-blur-lg" : "bg-background/10 backdrop-blur-lg"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
