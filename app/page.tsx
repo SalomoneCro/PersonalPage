@@ -790,46 +790,6 @@ export default function IndieHackerPortfolio() {
 
         {/* Mobile Content */}
         <div className="md:hidden">
-          <section id="projects" className="py-6 px-4">
-            <div className="mb-6">
-              <h2 className="font-heading font-bold text-xl mb-2 text-primary">{t.sections.projects}</h2>
-              <p className="text-sm text-foreground">{t.sections.projectsDesc}</p>
-            </div>
-
-            <div className="space-y-4">
-              {currentProjects[language].map((project, index) => (
-                <Card
-                  key={index}
-                  className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 border-2 cursor-pointer"
-                >
-                  <CardHeader className={`${project.bgColor} transition-all duration-300`}>
-                    <div className="flex items-center justify-between">
-                      <project.icon className={`w-5 h-5 ${project.color}`} />
-                      <Badge variant="outline" className={`${project.color} border-current text-xs`}>
-                        {project.status}
-                      </Badge>
-                    </div>
-                    <CardTitle className={`font-heading text-base group-hover:${project.color} transition-colors`}>
-                      {project.title}
-                    </CardTitle>
-                    <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-3 pt-4">
-                    <div className="space-y-2">
-                      <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                        <DollarSign className="w-3 h-3" />
-                        <span>{project.objective}</span>
-                      </div>
-                      <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                        <Users className="w-3 h-3" />
-                        <span>{project.users}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
 
           <section id="experience" className="py-8 px-4">
             <div className="mb-6">
@@ -867,6 +827,47 @@ export default function IndieHackerPortfolio() {
                         </li>
                       ))}
                     </ul>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          <section id="projects" className="py-6 px-4">
+            <div className="mb-6">
+              <h2 className="font-heading font-bold text-xl mb-2 text-primary">{t.sections.projects}</h2>
+              <p className="text-sm text-foreground">{t.sections.projectsDesc}</p>
+            </div>
+
+            <div className="space-y-4">
+              {currentProjects[language].map((project, index) => (
+                <Card
+                  key={index}
+                  className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 border-2 cursor-pointer"
+                >
+                  <CardHeader className={`${project.bgColor} transition-all duration-300`}>
+                    <div className="flex items-center justify-between">
+                      <project.icon className={`w-5 h-5 ${project.color}`} />
+                      <Badge variant="outline" className={`${project.color} border-current text-xs`}>
+                        {project.status}
+                      </Badge>
+                    </div>
+                    <CardTitle className={`font-heading text-base group-hover:${project.color} transition-colors`}>
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3 pt-4">
+                    <div className="space-y-2">
+                      <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
+                        <DollarSign className="w-3 h-3" />
+                        <span>{project.objective}</span>
+                      </div>
+                      <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
+                        <Users className="w-3 h-3" />
+                        <span>{project.users}</span>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
