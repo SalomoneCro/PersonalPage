@@ -28,8 +28,8 @@ const content = {
   en: {
     nav: {
       home: "Home",
-      projects: "Projects",
-      experience: "Experience",
+      projects: "Experience",
+      experience: "Projects",
       contact: "Contact",
     },
     hero: {
@@ -62,12 +62,17 @@ const content = {
       },
     },
     footer: "Built with v0 by Vercel.",
+    education: {
+      degree: "Bachelor's Degree in Applied Mathematics",
+      university: "Universidad Nacional de Córdoba • 2021-Present",
+      description: "Comprehensive mathematical foundation with specialized focus on data science, computer science, and artificial intelligence. Core curriculum included: Advanced Algorithms & Data Structures, Neural Networks & Deep Learning, Differential Equations, Probability & Statistics, Bayesian Theory, Numerical Analysis, Algorithm Design & Complexity Theory, Operations Research, Mathematical Modeling, Quantitative Finance, Machine Learning, and Computational Simulation & Modeling."
+    },
   },
   es: {
     nav: {
       home: "Inicio",
-      projects: "Proyectos",
-      experience: "Experiencia",
+      projects: "Experiencia",
+      experience: "Proyectos",
       contact: "Contacto",
     },
     hero: {
@@ -100,6 +105,11 @@ const content = {
       },
     },
     footer: "Construido con v0 by Vercel.",
+    education: {
+      degree: "Licenciatura en Matemática Aplicada",
+      university: "Universidad Nacional de Córdoba • 2021-Presente",
+      description: "Fundación matemática integral con enfoque especializado en ciencia de datos, ciencias de la computación e inteligencia artificial. El plan de estudios incluyó: Algoritmos Avanzados y Estructuras de Datos, Redes Neuronales y Deep Learning, Ecuaciones Diferenciales, Probabilidad y Estadística, Teoría Bayesiana, Análisis Numérico, Diseño de Algoritmos y Teoría de Complejidad, Investigación de Operaciones, Modelado Matemático, Finanzas Cuantitativas, Machine Learning, y Simulación y Modelado Computacional."
+    },
   },
 }
 
@@ -114,27 +124,24 @@ export default function IndieHackerPortfolio() {
 
   const t = content[language]
 
-  const currentProjects = [
+  const currentProjects = {
+  en: [
     {
       title: "Outsiders",
       description: "Progress tracking app for professional snowboarders",
       status: t.projects.status.mvp,
       objective: "Help athletes and coaches track training progress and performance metrics",
-      users:
-        "Beta tested with a small team of professional snowboarders and their coach, gathering feedback on usability and feature requirements",
+      users: "Beta tested with a small team of professional snowboarders and their coach, gathering feedback on usability and feature requirements",
       icon: Mountain,
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
     {
       title: "Lugarcito",
-      description:
-        "Co-founded carpooling platform solving transportation challenges in Central and Southeast Córdoba Province, Argentina",
+      description: "Co-founded carpooling platform solving transportation challenges in Central and Southeast Córdoba Province, Argentina",
       status: t.projects.status.closed,
-      objective:
-        "Connect drivers and passengers to reduce transportation costs and improve mobility access in underserved areas",
-      users:
-        "Built from scratch: database architecture, matching algorithms, and route optimization using graph theory for maximum efficiency. Led social media marketing, creating content and editing promotional videos",
+      objective: "Connect drivers and passengers to reduce transportation costs and improve mobility access in underserved areas",
+      users: "Built from scratch: database architecture, matching algorithms, and route optimization using graph theory for maximum efficiency. Led social media marketing, creating content and editing promotional videos",
       icon: Rocket,
       color: "text-primary",
       bgColor: "bg-primary/10",
@@ -143,63 +150,89 @@ export default function IndieHackerPortfolio() {
       title: "Stock Trading Robots",
       description: "Built intelligent algorithmic trading systems using advanced machine learning techniques",
       status: t.projects.status.research,
-      objective:
-        "Develop automated trading strategies through reinforcement learning and time series forecasting models",
-      users:
-        "Successfully outperformed market benchmarks in backtesting across multiple approaches, including Proximal Policy Optimization (PPO) and Dynamic Mode Decomposition (DMD)",
+      objective: "Develop automated trading strategies through reinforcement learning and time series forecasting models",
+      users: "Successfully outperformed market benchmarks in backtesting across multiple approaches, including Proximal Policy Optimization (PPO) and Dynamic Mode Decomposition (DMD)",
       icon: Mountain,
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
     {
       title: "AI Legal Document Summarization",
-      description:
-        "Built an automated system for generating judicial case summaries using Large Language Models for Córdoba Provincial Courts",
+      description: "Built an automated system for generating judicial case summaries using Large Language Models for Córdoba Provincial Courts",
       status: t.projects.status.awaiting,
-      objective:
-        "Automate metadata extraction and synopsis generation from legal documents to reduce manual workload for legal professionals",
-      users:
-        "Developed advanced prompting techniques (Chain of Thought, Few-Shot) and implemented quantization for efficient processing on limited hardware. Successfully processed complex legal texts without hallucinations using Llama-3.2-11B-Vision-Instruct model",
+      objective: "Automate metadata extraction and synopsis generation from legal documents to reduce manual workload for legal professionals",
+      users: "Developed advanced prompting techniques (Chain of Thought, Few-Shot) and implemented quantization for efficient processing on limited hardware. Successfully processed complex legal texts without hallucinations using Llama-3.2-11B-Vision-Instruct model",
       icon: Mountain,
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
     {
       title: "AI Recommendation System for E-commerce Sellers",
-      description:
-        "Developing advanced recommendation system using Reinforcement Learning and Transformers to suggest actionable strategies for e-commerce sellers (ongoing thesis project)",
+      description: "Developing advanced recommendation system using Reinforcement Learning and Transformers to suggest actionable strategies for e-commerce sellers (ongoing thesis project)",
       status: t.projects.status.development,
-      objective:
-        "Design RL-based system that suggests strategic actions to sellers (pricing, advertising, promotions) optimizing long-term business metrics rather than immediate recommendations",
-      users:
-        "Currently working with MercadoLibre's ($MELI) ML Technical Leader. Implementing Decision Transformer and variants (RLT4Rec, Retentive DT) with offline RL techniques. Comparing against traditional baselines (GRU4Rec, SASRec, BERT4Rec) using real e-commerce data",
+      objective: "Design RL-based system that suggests strategic actions to sellers (pricing, advertising, promotions) optimizing long-term business metrics rather than immediate recommendations",
+      users: "Currently working with MercadoLibre's ($MELI) ML Technical Leader. Implementing Decision Transformer and variants (RLT4Rec, Retentive DT) with offline RL techniques. Comparing against traditional baselines (GRU4Rec, SASRec, BERT4Rec) using real e-commerce data",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+    },
+  ],
+  es: [
+    {
+      title: "Outsiders",
+      description: "App de seguimiento de progreso para snowboarders profesionales",
+      status: t.projects.status.mvp,
+      objective: "Ayudar a atletas y entrenadores a seguir el progreso de entrenamiento y métricas de rendimiento",
+      users: "Probado en beta con un pequeño equipo de snowboarders profesionales y su entrenador, recopilando feedback sobre usabilidad y requisitos de funcionalidades",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+    },
+    {
+      title: "Lugarcito",
+      description: "Co-fundé plataforma de carpooling que resuelve desafíos de transporte en la Provincia Central y Sureste de Córdoba, Argentina",
+      status: t.projects.status.closed,
+      objective: "Conectar conductores y pasajeros para reducir costos de transporte y mejorar el acceso a movilidad en áreas desatendidas",
+      users: "Construido desde cero: arquitectura de base de datos, algoritmos de emparejamiento y optimización de rutas usando teoría de grafos para máxima eficiencia. Lideré marketing en redes sociales, creando contenido y editando videos promocionales",
+      icon: Rocket,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+    },
+    {
+      title: "Robots de Trading de Acciones",
+      description: "Construí sistemas de trading algorítmico inteligentes usando técnicas avanzadas de machine learning",
+      status: t.projects.status.research,
+      objective: "Desarrollar estrategias de trading automatizadas a través de aprendizaje por refuerzo y modelos de pronóstico de series temporales",
+      users: "Superé exitosamente los benchmarks del mercado en backtesting a través de múltiples enfoques, incluyendo Optimización de Política Proximal (PPO) y Descomposición de Modo Dinámico (DMD)",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+    },
+    {
+      title: "Resumen Automático de Documentos Legales con IA",
+      description: "Construí un sistema automatizado para generar resúmenes de casos judiciales usando Modelos de Lenguaje Grandes para los Tribunales Provinciales de Córdoba",
+      status: t.projects.status.awaiting,
+      objective: "Automatizar la extracción de metadatos y generación de sinopsis de documentos legales para reducir la carga de trabajo manual de profesionales legales",
+      users: "Desarrollé técnicas avanzadas de prompting (Chain of Thought, Few-Shot) e implementé cuantización para procesamiento eficiente en hardware limitado. Procesé exitosamente textos legales complejos sin alucinaciones usando el modelo Llama-3.2-11B-Vision-Instruct",
+      icon: Mountain,
+      color: "text-primary",
+      bgColor: "bg-primary/10",
+    },
+    {
+      title: "Sistema de Recomendaciones de IA para Vendedores de E-commerce",
+      description: "Desarrollando sistema avanzado de recomendaciones usando Aprendizaje por Refuerzo y Transformers para sugerir estrategias accionables a vendedores de e-commerce (proyecto de tesis en curso)",
+      status: t.projects.status.development,
+      objective: "Diseñar sistema basado en RL que sugiera acciones estratégicas a vendedores (precios, publicidad, promociones) optimizando métricas de negocio a largo plazo en lugar de recomendaciones inmediatas",
+      users: "Actualmente trabajando con el Líder Técnico de ML de MercadoLibre ($MELI). Implementando Decision Transformer y variantes (RLT4Rec, Retentive DT) con técnicas de RL offline. Comparando contra baselines tradicionales (GRU4Rec, SASRec, BERT4Rec) usando datos reales de e-commerce",
       icon: Mountain,
       color: "text-primary",
       bgColor: "bg-primary/10",
     },
   ]
+  }
 
-  const previousProjects = [
-    {
-      title: "Data Scientist trainee",
-      description: "Trabajé en una startup especializada en inversiones usando inteligencia artificial",
-      outcome: "Aprendi a trabajar en una organización",
-      icon: Target,
-      color: "text-primary",
-      year: "2024",
-    },
-    {
-      title: "Snowboard Instructor",
-      description: "Trabajé como instrucor de snowboard en Windham, Nueva York",
-      outcome: "Me divertí como nunca!",
-      metrics: "+100 alumnos",
-      icon: Mountain,
-      color: "text-secondary",
-      year: "2022-2025",
-    },
-  ]
-
-  const experience = [
+  const experience = {
+  en: [
     {
       role: "Data Scientist",
       company: "Lightstorm.ai",
@@ -241,7 +274,51 @@ export default function IndieHackerPortfolio() {
       icon: Mountain,
       color: "text-primary",
     },
+  ],
+  es: [
+    {
+      role: "Científico de Datos",
+      company: "Lightstorm.ai",
+      period: "2024",
+      location: "Madrid, España (Remoto)",
+      achievements: [
+        "Desarrollé una librería interna siguiendo las mejores prácticas de ingeniería de software",
+        "Construí una solución basada en datos desde cero para abordar un problema crítico de la startup",
+        "Apliqué tanto habilidades de ingeniería de software como de ciencia de datos en proyectos del mundo real",
+      ],
+      icon: Rocket,
+      color: "text-primary",
+    },
+    {
+      role: "Desarrollador de Productos y Emprendedor",
+      company: "Proyectos Independientes",
+      period: "2025",
+      location: "Córdoba, Argentina",
+      achievements: [
+        "Conduje investigación de mercado y validación de usuarios para múltiples conceptos SaaS",
+        "Construí aplicaciones web funcionales usando herramientas de desarrollo asistidas por IA (v0) con integración de base de datos",
+        "Implementé sistemas de autenticación de usuarios e integraciones de API usando stack moderno (Supabase, Google OAuth)",
+        "Me involucré en desarrollo de productos end-to-end desde ideación hasta descubrimiento de clientes y estrategias de go-to-market",
+        "Demostré adaptabilidad técnica aprendiendo y aplicando rápidamente nuevas tecnologías para resolver necesidades de productos",
+      ],
+      icon: Rocket,
+      color: "text-primary",
+    },
+    {
+      role: "Instructor de Snowboard y Esquí",
+      company: "Windham Mountain Club",
+      period: "2 temporadas",
+      location: "Estado de Nueva York, EE.UU.",
+      achievements: [
+        "Enseñé snowboard y esquí a grupos diversos en inglés, adaptando el estilo de comunicación a diferentes niveles de habilidad",
+        "Desarrollé fuertes habilidades interpersonales y de liderazgo en entornos de alta presión y críticos para la seguridad",
+        "Demostré adaptabilidad cultural e independencia trabajando internacionalmente",
+      ],
+      icon: Mountain,
+      color: "text-primary",
+    },
   ]
+  }
 
   const useStaggeredAnimation = (itemCount: number) => {
     const [animatedItems, setAnimatedItems] = useState<Set<number>>(new Set())
@@ -261,8 +338,8 @@ export default function IndieHackerPortfolio() {
     return animatedItems
   }
 
-  const animatedCurrentProjects = useStaggeredAnimation(currentProjects.length)
-  const animatedPreviousProjects = useStaggeredAnimation(previousProjects.length)
+  const animatedCurrentProjects = useStaggeredAnimation(currentProjects.en.length)
+
 
   useEffect(() => {
     setIsVisible(true)
@@ -537,9 +614,8 @@ export default function IndieHackerPortfolio() {
                 <h2 className="font-heading font-bold text-2xl lg:text-3xl mb-2 text-accent">{t.sections.journey}</h2>
                 <p className="text-base text-foreground">{t.sections.journeyDesc}</p>
               </div>
-
               <div className="space-y-6">
-                {experience.map((job, index) => (
+                {experience[language].map((job, index) => (
                   <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-2">
                     <CardHeader>
                       <div className="flex items-start justify-between">
@@ -581,7 +657,7 @@ export default function IndieHackerPortfolio() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {currentProjects.map((project, index) => (
+                {currentProjects[language].map((project, index) => (
                   <Card
                     key={index}
                     className={`group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 border-2 cursor-pointer overflow-hidden ${
@@ -644,20 +720,16 @@ export default function IndieHackerPortfolio() {
                   <div className="flex items-center space-x-3">
                     <GraduationCap className="w-6 h-6 text-accent" />
                     <div>
-                      <CardTitle className="font-heading text-base">Bachelor's Degree in Applied Mathematics</CardTitle>
+                      <CardTitle className="font-heading text-base">{t.education.degree}</CardTitle>
                       <CardDescription className="text-sm font-medium mt-1 text-foreground/80">
-                        Universidad Nacional de Córdoba • 2021-Present
+                        {t.education.university}
                       </CardDescription>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-foreground/80">
-                    Comprehensive mathematical foundation with specialized focus on data science, computer science, and
-                    artificial intelligence. Core curriculum included: Advanced Algorithms & Data Structures, Neural
-                    Networks & Deep Learning, Differential Equations, Probability & Statistics, Bayesian Theory,
-                    Numerical Analysis, Algorithm Design & Complexity Theory, Operations Research, Mathematical
-                    Modeling, Quantitative Finance, Machine Learning, and Computational Simulation & Modeling.
+                    {t.education.description}
                   </p>
                 </CardContent>
               </Card>
@@ -704,7 +776,7 @@ export default function IndieHackerPortfolio() {
             </div>
 
             <div className="space-y-4">
-              {currentProjects.map((project, index) => (
+              {currentProjects[language].map((project, index) => (
                 <Card
                   key={index}
                   className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 border-2 cursor-pointer"
@@ -745,7 +817,7 @@ export default function IndieHackerPortfolio() {
             </div>
 
             <div className="space-y-4">
-              {experience.map((job, index) => (
+              {experience[language].map((job, index) => (
                 <Card key={index} className="group hover:shadow-lg transition-all duration-300 border-2">
                   <CardHeader>
                     <div className="space-y-3">
