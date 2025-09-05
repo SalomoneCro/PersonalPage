@@ -68,8 +68,8 @@ const content = {
   },
   es: {
     nav: {
-      projects: "Experiencia",
-      experience: "Proyectos",
+      experience: "Experiencia",
+      projects: "Proyectos",
       contact: "Contacto",
     },
     hero: {
@@ -480,8 +480,15 @@ export default function IndieHackerPortfolio() {
                 ].map((item, index) => (
                   <button
                     key={item.name}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`text-sm font-medium px-3 py-2 rounded-lg transition-all duration-300 text-left hover:bg-primary/10 ${
+                    onClick={(e) => {
+                      e.preventDefault()
+                      scrollToSection(item.id)
+                    }}
+                    onTouchEnd={(e) => {
+                      e.preventDefault()
+                      scrollToSection(item.id)
+                    }}
+                    className={`text-sm font-medium px-3 py-2 rounded-lg transition-all duration-300 text-left hover:bg-primary/10 touch-manipulation ${
                       activeSection === item.id ? "text-primary bg-primary/5" : "text-foreground"
                     }`}
                     style={{ animationDelay: `${index * 50}ms` }}
@@ -491,7 +498,7 @@ export default function IndieHackerPortfolio() {
                 ))}
                 <button
                   onClick={() => setLanguage(language === "en" ? "es" : "en")}
-                  className="flex items-center space-x-2 px-3 py-2 rounded-lg border border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 text-sm font-medium text-left"
+                  className="flex items-center space-x-2 px-3 py-2 rounded-lg border border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 text-sm font-medium text-left touch-manipulation"
                 >
                   <Globe className="w-4 h-4" />
                   <span>{language === "en" ? "Cambiar a Español" : "Switch to English"}</span>
@@ -790,7 +797,6 @@ export default function IndieHackerPortfolio() {
 
         {/* Mobile Content */}
         <div className="md:hidden">
-
           <section id="experience" className="py-8 px-4">
             <div className="mb-6">
               <h2 className="font-heading font-bold text-xl mb-2 text-accent">{t.sections.journey}</h2>
