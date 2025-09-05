@@ -17,9 +17,10 @@ import {
   DollarSign,
   Menu,
   X,
-  ExternalLink,
   Mountain,
   Globe,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react"
 
 const content = {
@@ -118,6 +119,7 @@ export default function IndieHackerPortfolio() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
   const [isScrolled, setIsScrolled] = useState(false)
+  const [expandedCards, setExpandedCards] = useState<Set<number>>(new Set())
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   const t = content[language]
@@ -420,7 +422,21 @@ export default function IndieHackerPortfolio() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" })
     }
-    setIsMobileMenuOpen(false)
+    setTimeout(() => {
+      setIsMobileMenuOpen(false)
+    }, 100)
+  }
+
+  const toggleCardExpansion = (index: number) => {
+    setExpandedCards((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(index)) {
+        newSet.delete(index)
+      } else {
+        newSet.add(index)
+      }
+      return newSet
+    })
   }
 
   return (
@@ -684,57 +700,59 @@ export default function IndieHackerPortfolio() {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {currentProjects[language].map((project, index) => (
-                  <Card
-                    key={index}
-                    className={`group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 border-2 cursor-pointer overflow-hidden ${
-                      animatedCurrentProjects.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                    }`}
-                    style={{ transitionDelay: `${index * 150}ms` }}
-                  >
-                    <CardHeader className={`${project.bgColor} transition-all duration-300 relative`}>
-                      <div className="flex items-center justify-between">
-                        <project.icon
-                          className={`w-6 h-6 ${project.color} group-hover:scale-110 transition-transform duration-300`}
-                        />
-                        <Badge
-                          variant="outline"
-                          className={`${project.color} border-current text-xs hover:bg-current hover:text-background transition-colors`}
-                        >
-                          {project.status}
-                        </Badge>
-                      </div>
-                      <CardTitle className={`font-heading text-lg group-hover:${project.color} transition-colors`}>
-                        {project.title}
-                      </CardTitle>
-                      <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
-
-                      <div className="mt-3"></div>
-                    </CardHeader>
-                    <CardContent className="space-y-3 pt-4">
-                      <div className="space-y-2">
-                        <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                          <DollarSign className="w-3 h-3" />
-                          <span>{project.objective}</span>
+                {currentProjects[language].map((project, index) => {
+                  const isExpanded = expandedCards.has(index)
+                  return (
+                    <Card
+                      key={index}
+                      className={`group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 border-2 cursor-pointer overflow-hidden ${
+                        animatedCurrentProjects.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                      }`}
+                      style={{ transitionDelay: `${index * 150}ms` }}
+                      onClick={() => toggleCardExpansion(index)}
+                    >
+                      <CardHeader className={`${project.bgColor} transition-all duration-300 relative`}>
+                        <div className="flex items-center justify-between">
+                          <project.icon
+                            className={`w-6 h-6 ${project.color} group-hover:scale-110 transition-transform duration-300`}
+                          />
+                          <div className="flex items-center space-x-2">
+                            <Badge
+                              variant="outline"
+                              className={`${project.color} border-current text-xs hover:bg-current hover:text-background transition-colors`}
+                            >
+                              {project.status}
+                            </Badge>
+                            {isExpanded ? (
+                              <ChevronUp className={`w-4 h-4 ${project.color}`} />
+                            ) : (
+                              <ChevronDown className={`w-4 h-4 ${project.color}`} />
+                            )}
+                          </div>
                         </div>
-                        <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                          <Users className="w-3 h-3" />
-                          <span>{project.users}</span>
-                        </div>
-                      </div>
+                        <CardTitle className={`font-heading text-lg group-hover:${project.color} transition-colors`}>
+                          {project.title}
+                        </CardTitle>
+                        <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
+                      </CardHeader>
 
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className={`w-full mt-3 ${project.color} hover:bg-current hover:text-background opacity-0 group-hover:opacity-100 transition-all duration-300`}
-                        onClick={() => window.open("https://github.com/SalomoneCro", "_blank")}
-                      >
-                        {t.projects.viewDetails}
-                        <ExternalLink className="w-3 h-3 ml-2" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+                      {isExpanded && (
+                        <CardContent className="space-y-3 pt-4 animate-in slide-in-from-top-2 duration-300">
+                          <div className="space-y-2">
+                            <div className={`flex items-start space-x-2 text-xs font-medium ${project.color}`}>
+                              <DollarSign className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                              <span>{project.objective}</span>
+                            </div>
+                            <div className={`flex items-start space-x-2 text-xs font-medium ${project.color}`}>
+                              <Users className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                              <span>{project.users}</span>
+                            </div>
+                          </div>
+                        </CardContent>
+                      )}
+                    </Card>
+                  )
+                })}
               </div>
             </section>
 
@@ -846,37 +864,51 @@ export default function IndieHackerPortfolio() {
             </div>
 
             <div className="space-y-4">
-              {currentProjects[language].map((project, index) => (
-                <Card
-                  key={index}
-                  className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 border-2 cursor-pointer"
-                >
-                  <CardHeader className={`${project.bgColor} transition-all duration-300`}>
-                    <div className="flex items-center justify-between">
-                      <project.icon className={`w-5 h-5 ${project.color}`} />
-                      <Badge variant="outline" className={`${project.color} border-current text-xs`}>
-                        {project.status}
-                      </Badge>
-                    </div>
-                    <CardTitle className={`font-heading text-base group-hover:${project.color} transition-colors`}>
-                      {project.title}
-                    </CardTitle>
-                    <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-3 pt-4">
-                    <div className="space-y-2">
-                      <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                        <DollarSign className="w-3 h-3" />
-                        <span>{project.objective}</span>
+              {currentProjects[language].map((project, index) => {
+                const isExpanded = expandedCards.has(index)
+                return (
+                  <Card
+                    key={index}
+                    className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-primary/50 border-2 cursor-pointer"
+                    onClick={() => toggleCardExpansion(index)}
+                  >
+                    <CardHeader className={`${project.bgColor} transition-all duration-300`}>
+                      <div className="flex items-center justify-between">
+                        <project.icon className={`w-5 h-5 ${project.color}`} />
+                        <div className="flex items-center space-x-2">
+                          <Badge variant="outline" className={`${project.color} border-current text-xs`}>
+                            {project.status}
+                          </Badge>
+                          {isExpanded ? (
+                            <ChevronUp className={`w-4 h-4 ${project.color}`} />
+                          ) : (
+                            <ChevronDown className={`w-4 h-4 ${project.color}`} />
+                          )}
+                        </div>
                       </div>
-                      <div className={`flex items-center space-x-2 text-xs font-medium ${project.color}`}>
-                        <Users className="w-3 h-3" />
-                        <span>{project.users}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      <CardTitle className={`font-heading text-base group-hover:${project.color} transition-colors`}>
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-foreground/80 text-sm">{project.description}</CardDescription>
+                    </CardHeader>
+
+                    {isExpanded && (
+                      <CardContent className="space-y-3 pt-4 animate-in slide-in-from-top-2 duration-300">
+                        <div className="space-y-2">
+                          <div className={`flex items-start space-x-2 text-xs font-medium ${project.color}`}>
+                            <DollarSign className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                            <span>{project.objective}</span>
+                          </div>
+                          <div className={`flex items-start space-x-2 text-xs font-medium ${project.color}`}>
+                            <Users className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                            <span>{project.users}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    )}
+                  </Card>
+                )
+              })}
             </div>
           </section>
 
