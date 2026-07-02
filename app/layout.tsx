@@ -1,15 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Space_Grotesk } from "next/font/google"
-import { DM_Sans } from "next/font/google"
+import { Bricolage_Grotesque, DM_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 
-const spaceGrotesk = Space_Grotesk({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-bricolage",
 })
 
 const dmSans = DM_Sans({
@@ -18,11 +17,29 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 })
 
+const title = "Pedro Salomone — AI Lead & Builder"
+const description =
+  "AI Lead building with LLMs and math at an early-stage startup — and building something of my own on the side. I write about what I learn along the way."
+
 export const metadata: Metadata = {
-  title: "Portfolio Personal - Desarrollador Frontend",
-  description:
-    "Portfolio personal de un desarrollador frontend senior especializado en React, Next.js y experiencias digitales innovadoras.",
-  generator: "v0.app",
+  metadataBase: new URL("https://pedrosalomone.com"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "https://pedrosalomone.com",
+    siteName: "Pedro Salomone",
+    type: "website",
+    images: ["/profile-picture.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    creator: "@pedrosalomonear",
+    images: ["/profile-picture.jpg"],
+  },
 }
 
 export default function RootLayout({
@@ -31,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${bricolage.variable} ${dmSans.variable}`}>
       <body className="font-sans antialiased">
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
