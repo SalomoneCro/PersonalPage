@@ -107,7 +107,7 @@ const en = {
     },
   ] as Job[],
   education: {
-    degree: "Bachelor's Degree in Applied Mathematics",
+    degree: "Master's Degree in Applied Mathematics",
     school: "Universidad Nacional de Córdoba (2021–Present)",
     description:
       "Focus on data science, computer science, and AI. Coursework includes neural networks & deep learning, algorithms & complexity, probability & statistics, Bayesian methods, numerical analysis, operations research, quantitative finance, and machine learning.",
