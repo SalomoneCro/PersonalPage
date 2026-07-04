@@ -43,7 +43,7 @@ const en = {
       "I build with AI and math. Currently AI Lead at Vera AI, an early-stage startup — and chasing something of my own on the side.",
     ctaLine: "I write about what I learn along the way.",
   },
-  followX: "Follow me on X",
+  followX: "Follow",
   sections: {
     whoiam: "Who I am",
     projects: "Projects",
@@ -123,7 +123,7 @@ const projectIcons = [FileText, Sparkles, Mountain, Route]
 function FollowOnX({ label }: { label: string }) {
   return (
     <Button asChild size="lg" className="group h-12 rounded-lg px-7 text-base font-semibold shadow-lg shadow-black/25">
-      <a href={X_URL} target="_blank" rel="noopener noreferrer" aria-label={`${label} (opens in a new tab)`}>
+      <a href={X_URL} target="_blank" rel="noopener noreferrer" aria-label={`${label} on X (opens in a new tab)`}>
         <XLogo className="size-[18px]" />
         {label}
         <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">
@@ -187,7 +187,7 @@ export default function Home() {
               </a>
             </nav>
             <Button asChild size="sm" className="group gap-1.5 font-semibold">
-              <a href={X_URL} target="_blank" rel="noopener noreferrer" aria-label={`${t.followX} (opens in a new tab)`}>
+              <a href={X_URL} target="_blank" rel="noopener noreferrer" aria-label={`${t.followX} on X (opens in a new tab)`}>
                 <XLogo className="size-4" />
                 <span className="hidden sm:inline">{t.followX}</span>
               </a>
