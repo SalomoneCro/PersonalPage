@@ -52,9 +52,9 @@ const en = {
   },
   whoiam: {
     builder:
-      "I'm an entrepreneur at heart who happens to love math and get obsessed with AI. I started out doing quantitative finance — applying math to markets — and now I work with LLMs and natural language at scale as AI Lead at Vera AI, an early-stage startup, where we ship fast and I learn a ton every week: RAG, LLM evals, and the messy reality of building AI that works. My dream isn't a unicorn or raising millions. It's building something of my own that pays the bills and gives me the freedom to live on my terms.",
+      "I'm an entrepreneur at heart who happens to love math and get obsessed with AI. I started out doing quantitative finance — applying math to markets — and now I work with LLMs and natural language at scale as AI Lead at Vera AI, an early-stage startup, where we ship fast and I learn a ton every week: RAG, LLM evals, and the messy reality of building AI that works. After a few failed ventures of my own, I joined Vera to soak up everything I can — so that when I next build something of my own, I'm ready for it.",
     adventurer:
-      "Outside the screen, I'm happiest a little out of my comfort zone. I've taught snowboarding, I ran a marathon, and I chase adrenaline where I can find it. I travel every time I get the chance — nothing opens my head like landing somewhere new and figuring it out. I'm also learning guitar, slowly and badly.",
+      "Outside the screen, I'm happiest a little out of my comfort zone. I've taught snowboarding, run a marathon, done some rock climbing, and I chase adrenaline where I can find it. I travel every time I get the chance — nothing opens my head like landing somewhere new and figuring it out. I'm also learning guitar, slowly and badly.",
   },
   projects: [
     {
